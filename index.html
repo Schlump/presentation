@@ -160,7 +160,7 @@
 							<li class="fragment">Results</li>
 						</ul>
 						</div>
-						<div id="standard-map" class="map"  style="float:right; width: 50%; height: 60vh;top: -5vh"></div> 
+						<div id="standard-map" class="map"  style="float:right; width: 50%; height: 60vh"></div> 
 					</section>					
 					<section data-state="standard2-map">
 						<div id="standard2-map" class="map"  style="margin: auto; width: 100%; height: 50vh; top: 5vh"></div> 
@@ -340,6 +340,9 @@
    				integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   				crossorigin="anonymous">
 		</script>
+		<script type="text/javascript" async
+  				src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
 
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/highcharts.js"></script> -->
 		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/themes/dark-unica.js"></script> -->
@@ -356,6 +359,7 @@
 				slideNumber: true,
 				center: false,
 				history: true,
+				enableSpeakerNotes: true,
 				viewDistance: 1,
 
 				// Enable the slide overview mode
@@ -404,9 +408,9 @@
 			// } );
 		</script>
 		<script type="text/javascript">
-		Reveal.addEventListener( 'slidechanged', function( event ) {
-			console.log(Reveal.getState());
-		});
+		// Reveal.addEventListener( 'slidechanged', function( event ) {
+		// 	console.log(Reveal.getState());
+		// });
 
 
 	Reveal.addEventListener( 'slidechanged', function( event ) {
