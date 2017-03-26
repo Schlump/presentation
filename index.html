@@ -119,8 +119,6 @@
 
 
 
-
-
 		</style>
 	</head>
 	<body>
@@ -163,25 +161,23 @@
 						<div style="float:left; width:45%">	
 						<ul>
 							<li class="fragment">First Nationalpark in Germany</li>
-							<li class="fragment">24.369 hectare</li>
+							<li class="fragment">24.369 hectares</li>
 								<aside class="notes">
 								<ul>
-								<li class="fragment">34.130 Football fields</li>
-								<li class="fragment">~0.1% area of the Saarland</li>
+								<li>34.130 Football fields</li>
+								<li>~0.1% area of the Saarland</li>
 								</ul>
 								</aside>
 							<li class="fragment">22 tree species</li>
-							<li class="fragment">Hyperspectral data problems</li>
-							<li class="fragment">Results</li>
 						</ul>
 						</div>
-						<div id="standard-map" class="map"  style="float:right; width: 50vh; height: 60vh;margin: auto"></div> 
+						<div id="standard-map" class="map"  style="float:right; width: 50vh; height: 60vh;margin: auto;"></div> 
 					</section>					
 					<section data-state="standard2-map">
-						<div id="standard2-map" class="map"  style="margin: auto; width: 100vh; height: 50vh;margin: auto"></div> 
+						<div id="standard2-map" class="map"  style="margin: auto; width: 100vh; height: 50vh;margin: auto;"></div> 
 					</section>
 	                <section data-state="hyspex-map">
-	                    <div id="hyspex-map" class="map"  style="margin: auto; width: 100vh; height: 80vh; bottom: 10vh"></div> 
+	                    <div id="hyspex-map" class="map"  style="margin: auto; width: 100vh; height: 80vh; bottom: 10vh;"></div> 
 	                </section>
 	                <section>
 	                	<div id="inventory" style="margin: auto; width: 90vh"></div>
@@ -205,34 +201,98 @@
                 </section>	
 
                 <section>
-               		<h2>Data</h2>
-               		<table style="font-size:25px">
+                    <section>
+               			<h3>Data</h3>
+               			<p>Spectral data:</p>
+               			<table style="font-size:30px;">
+               				<thead>
+               					<tr>
+               						<td>Sensor</td>
+               						<td style="font-size:25px">$$\text{Spectral range } (\mu m)$$</td>
+               						<td>Bands</td>
+               					</tr>
+               				</thead>
+               				<tbody>
+               					<tr>
+               					<td>HySpex VNIR-1600</td>
+               					<td>0.4 – 0.992</td>
+               					<td>160</td>
+               					<td></td>
+               					</tr>
+               					<tr>
+               					<td>HySpex SWIR- 320m-e</td>
+               					<td>0.968 – 2.498</td>
+               					<td>256</td>
+               					</tr>
+               				</tbody>
+               				
+               			</table>
+               			<br>
+               			<p>LiDAR data:</p>
+               			<p style="font-size:25px";>Based on data retrieved in  July 2012 with a RIEGL LMS-Q 680 (30-40 points per m² ) and single trees have been segmented by <a href="http://dx.doi.org/10.1016/j.jag.2015.06.008"><span style="font-size:25px">Latifi, et al. (2015)</span></a></p>
+               		</section>
+                	<section>
+               		<h3>Data</h3>
+					<table class="fragment" data-fragment-index="1" style="float: left; width: 50%; font-size:25px;">
 					<thead>
 						<tr>
 							<th colspan="3" style="text-align:center;">Spectral data</th>
-							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td style="text-align:center;">VNIR</td>
+								<td style="text-align:center;">SWIR</td>
+								<td style="text-align:center;">Vegetation indices</td>
+							</tr>
+							<tr>
+								<td>131 Bands</td>
+								<td>133 Bands</td>
+								<td style="text-align:center;">9 Indices</td>
+							</tr>
+					</tbody>
+					</table>
+					<table class="fragment" data-fragment-index="3" style="float: right; width: 45%; font-size:25px;">
+					<thead>
+						<tr>
 							<th colspan="2" style="text-align:center;">LiDAR data</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>VNIR</td>
-							<td>SWIR</td>
-							<td>Vegetation indices</td>
-							<td></td>
-							<td>DTM</td>
-							<td>Treecount</td>
-						</tr>
-						<tr>
-							<td>131 Bands</td>
-							<td>133 Bands</td>
-							<td>9 Indices</td>
-							<td></td>
-							<td>Elevation</td>
-							<td>Stem density</td>
-						</tr>
+							<tr>
+								<td style="text-align:center;">DTM</td>
+								<td style="text-align:center;">Treecount</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;">Elevation</td>
+								<td style="text-align:center;">Stem density</td>
+							</tr>
 					</tbody>
-				</table>
+					</table>
+					<div class="fragment" data-fragment-index="2">
+					<img src="img/spectrumplot.png"  class="plain" style="background:none; border:none; box-shadow:none; width: 50%;float: left;">
+					</div>
+					<div class="fragment" data-fragment-index="4">	
+					<img src="img/treecount.png"  class="plain" style="background:none; border:none; box-shadow:none; width: 50%;float: right;">
+					</div>	
+					</section>
+					<section>
+						<h3>Spectral data preprocessing:</h3>
+						<br>
+							<ol class="fragment">
+								<li>Raw data was processed using CATENA <a href="https://doi.org/10.5194/isprsarchives-XL-1-W1-177-2013"><span style="font-size:20px">[Krauß, et al. (2013)]</span></a></li>
+								<li>BRDF correction using BREFCOR <a href="https://doi.org/10.1109/TGRS.2014.2349946"><span style="font-size:20px">[Schläpfer, et al. (2015)]</span></a></li>
+								<li>Savitzky Golay filtering <a href="https://docs.scipy.org/doc/scipy-0.16.1/reference/generated/scipy.signal.savgol_filter.html"><span style="font-size:20px">[Scipy]</span></a></li>
+								<li>Brightness normalization <a href="http://dx.doi.org/10.1016/j.jqsrt.2010.03.007"><span style="font-size:20px">[Feilhauer, et al. (2010)]</span></a></li>
+								<li>Forest mask</li>
+							</ol>
+					</section>
+					<section>
+						<h3>Spectral training data</h3>
+						<div class="fragment" data-fragment-index="4">
+							<img src="img/spectrumplotpreprocessed.png"  class="plain" style="background:none; border:none; box-shadow:none; width:80%">
+						</div>	
+					</section>
                 </section>
 
 	            <section>
@@ -335,7 +395,7 @@
 					
 					<section data-background="img/Swirfull_BS_False_DTM_True.png" data-background-size="60%">
 						<p>SWIR + Spectral indices + LiDAR </p>	
-						<div class="wrapper" style="right: 400px;" > 
+						<div class="wrapper" style="right: 30%;" > 
 							<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
 							<div id="spacor"></div>
 							<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
@@ -359,7 +419,7 @@
 							<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 						</div>
 						<!-- <br> -->
-						<div id="swirfull" style="position: absolute; right: 72%; width: 40vh; height: 25vh; top: 320%; max-width: 50%;"></div>
+						<div id="swirfull" style="position: absolute; right: 72%; width: 40vh; height: 25vh; top: 320%; max-width: 45%;"></div>
 	
 					</section>
 				</section>    
@@ -974,9 +1034,6 @@ $(document).ready(function () {
 	    }]
         })
     })});			
-
-
-
 
 
 		</script>
