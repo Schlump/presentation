@@ -1,1 +1,928 @@
-My Page
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentation</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="src/leaflet/leaflet.css">
+		<link rel="stylesheet" href="css/presleaflet.css">
+		<link rel="stylesheet" href="css/leaflet.zoomhome.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+		</script>
+		<style type="text/css">
+
+			.wrapper {
+				position: absolute;
+				top: 75%;
+			  	left: -75%;
+			}
+
+			#wrapper2 {
+				width: 100%;
+			    /*overflow: hidden;  will contain if #first is longer than #second */
+			}
+			.first {
+			    width: 50%;
+			    float:left; /* add this */
+			}
+			.second {
+				width: 50%;
+				float: right;
+			    overflow: hidden;  if you don't want #second to wrap below #first 
+			}
+
+			#ap {
+			  background: rgb(23, 190, 207);
+			}
+			#pt {
+			  background: rgb(197,176,213);
+			}
+			#bp {
+			  background: rgb(255,187,120);
+			}
+			#fs {
+			  background: rgb(44,160,44);
+			}
+			#pm {
+			  background: rgb(140,86,75);
+			}
+			#ag {
+			  background: rgb(255,127,14);
+			}
+			#fe {
+			  background: rgb(152,223,138);
+			}
+			#pa {
+			  background: rgb(255, 152, 150);
+			}
+			#ld {
+			  background: rgb(214,39,40);
+			}
+			#aa {
+			  background: rgb(31,120,180);
+			}
+			#pmu {
+			  background: rgb(148,103,189);
+			}
+
+			.box {
+			    width: 15px;
+			    height: 15px;
+			    display: inline-block;
+			    vertical-align: middle;
+				left: -120px;
+			}
+
+			.speciestext {
+				margin-top: 25px!important;
+			    margin-left: 10px!important;
+			    font-size: small!important;
+			    font-style: italic!important;
+			    position: absolute;
+			    vertical-align: middle;
+			}
+			#spacor {
+				margin-top: -30px;
+			}
+
+			.highcharts-title {
+				fill:#fff!important;
+			}
+
+
+
+
+
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+
+		<header style="position: absolute;top: 50px; left: 100px; z-index:500; font-size:100px;"></header>
+
+			<div class="slides">
+				<section>
+					<br>
+					<h3>Random forests for a better than random classification of tree species based 
+						 on hyperspectral and LiDAR data
+					</h3>	
+					<br>
+					<br>
+					<br>
+					<br>
+					<p>
+						<small>By Yannic Fetik / <a href="mailto:yannic.fetik@web.de">yannic.fetik@web.de</a> </small> 
+					</p>
+
+
+				</section>
+
+				<section>
+					<h3>Talking points:</h3>
+					<ul>
+						<li class="fragment">Bavarian Forest National Park</li>
+						<li class="fragment">Data</li>
+						<li class="fragment">Software</li>
+						<li class="fragment">Forests of randomized trees</li>
+						<li class="fragment">Hyperspectral data problems</li>
+						<li class="fragment">Results</li>
+					</ul>
+				</section>
+
+				<section>
+					<section data-state="standard-map">
+						<h3>Bavarian Forest National Park</h3>
+						<div style="float:left; width:45%">	
+						<ul>
+							<li class="fragment">First Nationalpark in Germany</li>
+							<li class="fragment">24.369 hectare</li>
+								<ul style="font-size:25px">
+								<li class="fragment">34.130 Football fields</li>
+								<li class="fragment">0,003% area of the Saarland</li>
+								</ul>
+							<li class="fragment">22 tree species</li>
+							<li class="fragment">Hyperspectral data problems</li>
+							<li class="fragment">Results</li>
+						</ul>
+						</div>
+						<div id="standard-map" class="map"  style="float:right; width: 50%; height: 60vh;top: -5vh"></div> 
+					</section>					
+					<section data-state="standard2-map">
+						<div id="standard2-map" class="map"  style="margin: auto; width: 100%; height: 50vh; top: 5vh"></div> 
+					</section>
+	                <section data-state="hyspex-map">
+	                    <div id="hyspex-map" class="map"  style="right: 30%; width: 160%; height: 80vh; bottom: 10vh"></div> 
+	                </section>
+	                <section>
+	                	<div id="inventory" style="margin: auto; width: 90vh"></div>
+	                	<div id="wrapper2" style="margin: auto; width: 90vh" > 
+	                  		<div id="invNorth" class="first"  style="height: 20vh"></div>
+	                		<div id="invSouth" class="second"  style="height: 20vh"></div>
+	                	</div>
+	                </section>
+                </section>
+                <section>
+                	<h2>Software</h2>
+                			<img data-src="img/GDALLogoColor.png" class="fragment" style="width: 60px height: 60px;">
+                			<img data-src="img/Scipylogo.png" class="fragment" style="width: 80px height: 100px;">
+                			<img data-src="img/Scikit-learn_logo.png" class="fragment" style="width: 80px height: 100px;">
+       <!--          			<ul>
+							<li class="fragment"> <img data-src="img/GDALLogoColor.png" style="width: 80px height: 100px;"></li>
+							<li class="fragment"> <img data-src="img/Scipylogo.png" style="width: 100px height: 50px;"></li>
+							<li class="fragment"> <img data-src="img/Scikit-learn_logo.png" style="width: 100px height: 50px;"></li>
+							</ul> -->
+
+                </section>	
+
+                <section>
+               		<h2>Data</h2>
+               		<table style="font-size:25px">
+					<thead>
+						<tr>
+							<th colspan="3" style="text-align:center;">Spectral data</th>
+							<td></td>
+							<th colspan="2" style="text-align:center;">LiDAR data</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>VNIR</td>
+							<td>SWIR</td>
+							<td>Vegetation indices</td>
+							<td></td>
+							<td>DTM</td>
+							<td>Treecount</td>
+						</tr>
+						<tr>
+							<td>131 Bands</td>
+							<td>133 Bands</td>
+							<td>9 Indices</td>
+							<td></td>
+							<td>Elevation</td>
+							<td>Stem density</td>
+						</tr>
+					</tbody>
+				</table>
+                </section>
+
+	            <section>
+	            	<section>
+	            	<h3>Random Forests</h3>
+	            		Random forests form a family of methods that consist in building an
+						ensemble (or forest) of decision trees grown from a randomized vari-
+						ant of the tree induction algorithm
+
+	            		A random forest consists of a number of decision trees. Every node in the decision trees is a condition on a single feature, designed to split the dataset into two so that similar response values end up in the same set.
+	            	</section>
+	            	<section>
+	            		<h3>Why use forests of randomized trees</h3>
+	            	</section>
+	            	<section>
+	            		<h3>Feature importance</h3>
+	            		<p>Two ways of computing feature importance for randomized forets:</p>
+	            		 <p>Mean decrease in Accuracy (MDA)</p>
+	            		<p>Mean decrease in Impurity (MDI)</p>
+	            	</section>
+	            	<section>
+	            	<p>Mean decrease in Accuracy (MDA)</p>
+	            		Calculates each feature importance as the sum over the number of splits (accross all tress) that include the feature, proportionaly to the number of samples it splits.
+	            		
+	            	</section>
+	            	<section>
+					<p>Mean decrease in Accuracy (MDA)</p>
+	            	randomly permuting the values of the feature and measuring the resulting increase in error. The influence of the correlated features is also removed.
+	            		
+	            	</section>
+	            	<section>
+	            		<p>Strobl et al. (2008) later showed that MDA is biased as
+						well, and that it overestimates the importance of correlated variables </p>
+					</section>
+					<section>
+						<h3>
+							scikit-learn offers two basic types of random forests.
+						</h3>
+						<p>Random Forest [Breiman, (2001)]
+						<p>Extremely Randomized Trees [Geurts, et al. (2006)]</p>
+					</section>
+	            </section>
+
+				<section>
+					<section>
+						<h3>Results</h3>
+						<h4>Evaluation based on Kappa and F1-scores:</h4>
+						<div class="fragment">
+						<p>$$\text{Kappa: }\kappa = (p_o - p_e) / (1 - p_e)$$</p>
+						<p style="font-size:15px">$$p_o \text{is the observed agreement ratio, and}$$ $$p_e\text{is the expected agreement.}$$ </p>
+						<br>
+						</div>
+						<div class="fragment">
+						<p>$$\text{F1 score: } \text{F1} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}$$</p>
+						<p style="font-size:15px">$$\text{precision} = \frac{tp}{tp + fp} \qquad \text{recall} = \frac{tp}{tp + fn}$$ </p>
+						</div>
+					</section>	
+					<section>
+						<h3>Results</h3>
+						<h4>Validation based on spatial distribution and overall percentages:</h4>
+					</section>		
+					
+					<section data-background="img/Swirfull_BS_False_DTM_True.png" data-background-size="1150px">
+						<p>SWIR + Spectral indices + LiDAR </p>	
+						<div class="wrapper" style="right: 400px;" > 
+							<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
+							<div id="spacor"></div>
+							<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
+							<div id="spacor"></div>
+							<div id="ap" class="box"></div><span class="speciestext">Alnus glutinosa</span>
+							<div id="spacor"></div>
+							<div id="bp" class="box"></div><span class="speciestext">Betula pendula</span>
+							<div id="spacor"></div>
+							<div id="fs" class="box"></div><span class="speciestext">Fagus sylvatica</span>
+							<div id="spacor"></div>
+							<div id="fe" class="box"></div><span class="speciestext">Fraxinus excelsior</span>
+							<div id="spacor"></div>
+							<div id="ld" class="box"></div><span class="speciestext">Larix decidua</span>
+							<div id="spacor"></div>	
+							<div id="pa" class="box"></div><span class="speciestext">Picea abies</span>
+							<div id="spacor"></div>
+							<div id="pmu" class="box"></div><span class="speciestext">Pinus mugo</span>
+							<div id="spacor"></div>
+							<div id="pt" class="box"></div><span class="speciestext">Populus tremula</span>
+							<div id="spacor"></div>						
+							<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
+						</div>
+						<!-- <br> -->
+						<div id="swirfull" style="position: absolute; right: 72%; width: 40vh; height: 25vh; top: 320%"></div>
+	
+					</section>
+				</section>    
+<!-- 				<section data-state="standard-map">
+                    <div id="standard-map" class="map" style="right: 30%; width: 160%; height: 75vh; bottom: 10vh">></div> 
+                </section> -->
+
+
+                <section>
+                	<h3>Sources:</h3>
+                	<div style="font-size:25px">
+                	<p><a href="https://doi.org/10.1023/a:1010933404324">Breiman, Leo (2001). "Random Forests" In: Machine Learning 45.1, pp. 5–32.</p>
+                	<p><a href="https://doi.org/10.1007/s10994-006-6226-1">Geurts, et al. (2006). “Extremely randomized trees”. In: Machine Learning 63.1, pp. 3–42.</p>
+                   	<p><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008). “Conditional Variable Importance for Random Forests”. In: BMC Bioinformatics 9.1 </a>          		
+                	</p>
+                	<p><a href=" https://arxiv.org/abs/1407.7502v3">Louppe, Gilles (2014). “Understanding Random Forests: From Theory to Practice”. PhD thesis. University of Liège, Belgium.</a></p>
+                	</div>
+                </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="src/leaflet/leaflet.js"></script>
+		<script src="js/pres.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+		<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+   				integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  				crossorigin="anonymous">
+		</script>
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/highcharts.js"></script> -->
+		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/themes/dark-unica.js"></script> -->
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<!-- <script type="text/javascript" src="/src/highcharts/js/highcharts.js"></script> -->
+		<script src="js/leaflet.zoomhome.min.js"></script>
+
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				zoomKey: 'x',
+				slideNumber: true,
+				center: false,
+				history: true,
+				viewDistance: 1,
+
+				// Enable the slide overview mode
+				overview: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				math: {
+						mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+						config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+					},
+
+
+				dependencies: [
+					{ src: 'plugin/math/math.js', async: true },
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+			// Reveal.configure({ pdfMaxPagesPerSlide: 1 })
+
+
+			function runOnState(state, o) {
+                Reveal.addEventListener(state, function(e) {
+                    var removeListener = function() {
+                        o.stop();
+                        Reveal.removeEventListener('slidechanged', removeListener);
+                    }
+                    o.start();
+                    setTimeout(function() {
+                        Reveal.addEventListener('slidechanged', removeListener);
+                    }, 0);
+                });
+            }
+
+
+            runOnState('hyspex-map', window.hyspexMap);
+            runOnState('standard-map', window.standardMap);
+            runOnState('standard2-map', window.standardMap2);
+
+   //          Reveal.addEventListener( 'slidechanged', function( event ) {
+			//     redrawChart();     
+			// } );
+		</script>
+		<script type="text/javascript">
+		Reveal.addEventListener( 'slidechanged', function( event ) {
+			console.log(Reveal.getState());
+		});
+
+
+	Reveal.addEventListener( 'slidechanged', function( event ) {
+               // if (event.currentSlide = 1) {
+					$(document).ready(function () {
+						Highcharts.chart('swir', {
+				            chart: {
+				                plotBackgroundColor: null,
+				                plotBorderWidth: null,
+				                plotShadow: false,
+				                backgroundColor: '#222222',
+				                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+				                // color: "#f00",
+				                // fontFamily: 'serif',
+				                type: 'column'
+				            },
+
+				            exporting: {
+				                enabled: false
+				            },
+				            credits: {
+				                enabled: false
+				            },          
+				            title: {
+				                text: 'Predicted percentages'
+				            },
+				            tooltip: {
+				                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				            },
+
+
+				            labels: {
+				            	color: '#fff'
+
+				            },
+
+				            xAxis: {
+				                type: 'category'
+
+				            },
+				            yAxis: {
+					            	title: { text: 'Percentage' },
+
+
+					         },
+
+				            plotOptions: {
+				                    series: {
+				                        allowOverlap: true,
+				                        showInLegend: false,
+				                        borderWidth: 0,
+				                        dataLabels: {
+				                            enabled: true,
+					 						style: {
+						                        color: 'white',
+						                        fontSize: '8px',
+						                        textShadow: '0px 1px 2px #33333'
+						                    	},
+				                            format: '{point.y:.2f}%'
+				                        }
+				                    }
+				                },
+
+
+				            series: [{
+				                name: 'Species',
+				                colorByPoint: true,
+				                data: [{
+
+
+				                    name: 'Abies alba',
+				                    y: 8.77,
+				                    color: '#1f78b4'
+				                 
+				                }, {
+				                    name: 'Acer pseudoplatanus',
+				                    y: 1.36,
+				                    color: '#17BECF'
+				                }, {
+				                    name: 'Alnus glutinosa',
+				                    y: 0.43,
+				                    color: '#ff7f0e'
+				                }, {
+				                    name: 'Betula pendula',
+				                    y: 2.04,
+				                    color: '#ffbb78'
+				                }, {
+				                    name: 'Fagus sylvatica',
+				                    y: 28.87,
+				                    color: '#2ca02c'
+				                }, {
+				                    name: 'Fraxinus excelsior',
+				                    y: 1.34,
+				                    color: '#98df8a'
+				                }, {
+				                    name: 'Larix decidua',
+				                    y: 4.47,
+				                    color: '#d62728'
+				                }, {
+				                    name: 'Picea abies',
+				                    y: 50.15,
+				                    color: '#ff9896'
+				                }, {
+				                    name: 'Pinus mugo',
+				                    y: 2.53,
+				                    color: '#9467bd'
+				                }, {
+				                    name: 'Populus tremula',
+				                    y: 0.02,
+				                    color: '#c5b0d5'
+				                }, {
+				                    name: 'Pseudotsuga menziesii',
+				                    y: 0.02,
+				                    color: '#8c564b'
+
+				                }]
+				            }]
+					        })
+				        })});	
+
+$(document).ready(function () {
+	Highcharts.chart('swirfull', {
+	            chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false,
+	                backgroundColor: '#222222',
+	                type: 'column'
+	            },
+
+	            exporting: {
+	                enabled: false
+	            },
+	            credits: {
+	                enabled: false
+	            },          
+	            title: {
+	                text: 'Predicted percentages'
+	            },
+	            tooltip: {
+	                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+	            },
+
+
+	            labels: {
+	            	color: '#fff'
+
+	            },
+
+	            xAxis: {
+	                type: 'category'
+
+	            },
+	            yAxis: {
+	            	title: { text: 'Percentage' },
+
+
+	            },
+
+	            plotOptions: {
+	                    series: {
+	                        allowOverlap: true,
+	                        showInLegend: false,
+	                        borderWidth: 0,
+	                        dataLabels: {
+	                            enabled: true,
+		 						style: {
+			                        color: 'white',
+			                        fontSize: '8px',
+			                        textShadow: '0px 1px 2px #33333'
+			                    	},
+	                            format: '{point.y:.2f}%'
+	                        }
+	                    }
+	                },
+
+
+	            series: [{
+	                name: 'Species',
+	                colorByPoint: true,
+	                data: [{
+
+
+	                    name: 'Abies alba',
+	                    y: 9.24,
+	                    color: '#1f78b4'
+	                }, {
+	                    name: 'Acer pseudoplatanus',
+	                    y: 5.39,
+	                    color: '#17BECF'
+	                }, {
+	                    name: 'Alnus glutinosa',
+	                    y: 0.87,
+	                    color: '#ff7f0e'
+	                }, {
+	                    name: 'Betula pendula',
+	                    y: 0.67,
+	                    color: '#ffbb78'
+	                }, {
+	                    name: 'Fagus sylvatica',
+	                    y: 24.61,
+	                    color: '#2ca02c'
+	                }, {
+	                    name: 'Fraxinus excelsior',
+	                    y: 5.24,
+	                    color: '#98df8a'
+	                }, {
+	                    name: 'Larix decidua',
+	                    y: 8.7,
+	                    color: '#d62728'
+	                }, {
+	                    name: 'Picea abies',
+	                    y: 50.15,
+	                    color: '#ff9896'
+	                }, {
+	                    name: 'Pinus mugo',
+	                    y: 2.07,
+	                    color: '#9467bd'
+	                }, {
+	                    name: 'Populus tremula',
+	                    y: 0.06,
+	                    color: '#c5b0d5'
+	                }, {
+	                    name: 'Pseudotsuga menziesii',
+	                    y: 0.09,
+	                    color: '#8c564b'
+
+	                }]
+	            }]
+	        })
+        });	
+Reveal.addEventListener( 'slidechanged', function( event ) {
+$(document).ready(function () {
+	// if (event.currentSlide == 2,3) {
+		Highcharts.chart('inventory', {
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false,
+		                backgroundColor: '#222222',
+		                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+		                // color: "#f00",
+		                // fontFamily: 'serif',
+		                type: 'column'
+		            },
+
+		            exporting: {
+		                enabled: false
+		            },
+		            credits: {
+		                enabled: false
+		            },          
+		            title: {
+		                text: 'Inventory 2002/2003'
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+
+
+		            xAxis: {
+		                type: 'category'
+		            },
+		            yAxis: {
+		            	title: { text: 'Percentage' },
+
+
+		            },
+
+		            plotOptions: {
+		                    series: {
+		                    	showInLegend: false,
+		                        allowOverlap: true,
+		                        borderWidth: 0,
+		                        dataLabels: {
+		                            enabled: true,
+		                            style: {
+			                        color: 'white',
+			                        textShadow: '0px 1px 2px #33333'},
+		                            format: '{point.y:.1f}%'
+		                        }
+		                    }
+		                },
+
+
+		            series: [{
+		                name: 'Species',
+		                colorByPoint: true,
+		                data: [{
+
+
+		                    name: 'Abies alba',
+		                    y: 2.6,
+		                    color: '#1f78b4'
+		                 
+		                }, {
+		                    name: 'Acer pseudoplatanus',
+		                    y: 1.2,
+		                    color: '#17BECF'
+		                }, {
+		                    name: 'Alnus glutinosa',
+		                    y: 0,
+		                    color: '#ff7f0e'
+		                }, {
+		                    name: 'Betula pendula',
+		                    y: 0.7,
+		                    color: '#ffbb78'
+		                }, {
+		                    name: 'Fagus sylvatica',
+		                    y: 24.5,
+		                    color: '#2ca02c'
+		                }, {
+		                    name: 'Fraxinus excelsior',
+		                    y: 0.1,
+		                    color: '#98df8a'
+		                }, {
+		                    name: 'Larix decidua',
+		                    y: 0.1,
+		                    color: '#d62728'
+		                }, {
+		                    name: 'Picea abies',
+		                    y: 67.00,
+		                    color: '#ff9896'
+		                }, {
+		                    name: 'Pinus mugo',
+		                    y: 0.1,
+		                    color: '#9467bd'
+		                }, {
+		                    name: 'Populus tremula',
+		                    y: 0.1,
+		                    color: '#c5b0d5'
+		                }, {
+		                    name: 'Pseudotsuga menziesii',
+		                    y: 0.2,
+		                    color: '#8c564b'
+
+		                }]
+		            }]
+		        })
+	        })});			
+
+Reveal.addEventListener( 'slidechanged', function( event ) {
+$(document).ready(function () {
+	Highcharts.chart('invNorth', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        backgroundColor: '#222222',
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Species compositon northern part'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },    
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                style: {
+		                    color: 'white',
+		                    fontSize: '10px',
+		                    fontWeight: 'bold',
+		                    textShadow: '0px 1px 2px #33333'
+		                    },
+	            }
+	        }
+	    },
+	    series: [{
+
+	        name: 'North',
+	        colorByPoint: true,
+	        data: [{
+	            name: 'Picea abies',
+	            y: 24.4,
+	            color: '#ff9896'
+	        }, {
+	            name: 'Picea abies & other Conifers',
+	            y: 1.5,
+	            color: '#f28e2b'
+	        }, {
+	            name: 'Picea abies & Fagus sylvatica',
+	            y: 43.7,
+	            color: '#76b7b2'
+	        }, {
+	            name: 'Picea abies & other Broadleaf',
+	            y: 2.4,
+	            color: '#7f4c4b'
+	        }, {
+	            name: 'Mixed mountainous forest',
+	            y: 9,
+	            color: '#bcbd22'
+
+	        }, 
+
+	        {
+	            name: 'Hardwood & other Broadleaf',
+	            y: 0.3,
+	            color: '#73d8e2'
+	        },
+	        {
+	            name: 'Fagus sylvatica',
+	            color: '#2ca02c',
+	            y: 17.7
+	        }]
+	    }]
+	        })
+        })});			
+Reveal.addEventListener( 'slidechanged', function( event ) {
+$(document).ready(function () {
+	Highcharts.chart('invSouth', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        backgroundColor: '#222222',
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Species compositon southern part'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+
+
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },    
+
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.2f} %',
+	                style: {
+		                    color: 'white',
+		                    fontSize: '10px',
+		                    textShadow: false
+		                    },
+	            }
+	        }
+	    },
+	    series: [{
+	        name: 'South',
+	        colorByPoint: true,
+	        data: [
+
+	   {
+
+	            name: 'Picea abies & Fagus sylvatica',
+	            y: 26,
+	            color: '#76b7b2'
+	        }, {
+
+	            name: 'Picea abies & other Broadleaf',
+	            y: 25.3,
+	            color: '#7f4c4b'
+	        }, {
+
+	            name: 'Mixed mountainous forest',
+	            y: 15.4,
+	            color: '#bcbd22'
+
+	        }, {
+
+	            
+	            name: 'Picea abies & other Conifers',
+	            y: 1.9,
+	            color: '#f28e2b'
+	        }, {
+
+	            name: 'Fagus sylvatica & Picea abies',
+	            y: 18.4,
+	            color: '#80c680'
+	        },{
+
+	            name: 'Hardwood & other Broadleaf',
+	            y: 1.7,
+	            color: '#73d8e2'
+	        },
+	         {
+	            name: 'Picea abies',
+	            y: 10.1,
+	            color: '#ff9896'
+	        }, 
+	        {
+	            name: 'Fagus sylvatica',
+	            y: 1.2,
+	            color: '#2ca02c'
+	        }]
+	    }]
+        })
+    })});			
+
+
+
+
+
+		</script>
+	</body>
+</html>
