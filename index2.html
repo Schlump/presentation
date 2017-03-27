@@ -1,0 +1,1919 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentation</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="src/leaflet/leaflet.css">
+		<link rel="stylesheet" href="css/presleaflet.css">
+		<link rel="stylesheet" href="css/leaflet.zoomhome.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+		</script>
+		<style type="text/css">
+
+			.wrapper {
+				position: absolute;
+				top: 75%;
+			  	left: -75%;
+			}
+
+			#wrapper2 {
+				width: 100%;
+			    /*overflow: hidden;  will contain if #first is longer than #second */
+			}
+			.first {
+			    width: 50%;
+			    float:left; /* add this */
+			}
+			.second {
+				width: 50%;
+				float: right;
+			    overflow: hidden;  if you don't want #second to wrap below #first 
+			}
+
+			#ap {
+			  background: rgb(23, 190, 207);
+			}
+			#pt {
+			  background: rgb(197,176,213);
+			}
+			#bp {
+			  background: rgb(255,187,120);
+			}
+			#fs {
+			  background: rgb(44,160,44);
+			}
+			#pm {
+			  background: rgb(140,86,75);
+			}
+			#ag {
+			  background: rgb(255,127,14);
+			}
+			#fe {
+			  background: rgb(152,223,138);
+			}
+			#pa {
+			  background: rgb(255, 152, 150);
+			}
+			#ld {
+			  background: rgb(214,39,40);
+			}
+			#aa {
+			  background: rgb(31,120,180);
+			}
+			#pmu {
+			  background: rgb(148,103,189);
+			}
+
+			.box {
+			    width: 15px;
+			    height: 15px;
+			    display: inline-block;
+			    vertical-align: middle;
+				left: -120px;
+			}
+
+			.speciestext {
+				margin-top: 25px!important;
+			    margin-left: 10px!important;
+			    font-size: small!important;
+			    font-style: italic!important;
+			    position: absolute;
+			    vertical-align: middle;
+			}
+
+			#spacor {
+				margin-top: -30px;
+			}
+
+			.highcharts-title {
+				fill:#fff!important;
+			}
+			.vertical{
+			    writing-mode:tb-rl;
+			    -webkit-transform:rotate(180deg);
+			    -moz-transform:rotate(180deg);
+			    -o-transform: rotate(180deg);
+			    -ms-transform:rotate(180deg);
+			    transform: rotate(180deg);
+			    white-space:nowrap;
+			    display:block;
+			    bottom:0;
+			    width:20px;
+			    height:20px;
+			}
+			html.img-right div.slide-background.present {
+			    background-position: 80%;
+			}
+
+
+
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+
+		<header style="position: absolute;top: 50px; left: 100px; z-index:500; font-size:100px;"></header>
+
+			<div class="slides">
+				<section>
+					<br>
+					<h3>Random forests for a better than random classification of tree species based 
+						 on hyperspectral and LiDAR data
+					</h3>	
+					<br>
+					<br>
+					<br>
+					<br>
+					<p>
+						<small>By Yannic Fetik / <a href="mailto:yannic.fetik@web.de">yannic.fetik@web.de</a> </small> 
+					</p>
+
+
+				</section>
+
+				<section>
+					<h3>Talking points:</h3>
+					<ul>
+						<li class="fragment">Bavarian Forest National Park</li>
+						<li class="fragment">Software</li>
+						<li class="fragment">Data</li>
+						<li class="fragment">Forests of randomized trees</li>
+						<!-- <li class="fragment">Hyperspectral data problems</li> -->
+						<li class="fragment">Results</li>
+					</ul>
+				</section>
+
+				<section>
+					<section data-state="standard-map">
+						<h3>Bavarian Forest National Park</h3>
+						<div style="float:left; width:45%">	
+						<ul>
+							<li class="fragment">First Nationalpark in Germany</li>
+								<ul>
+									<li class="fragment" >Founded: 1970</li>
+									<li class="fragment" >Enlarged: 1997</li>
+								</ul>
+							<li class="fragment">Currently: 24.369 hectares</li>
+								<aside class="notes">
+								<ul>
+								<li>34.130 Football fields</li>
+								<li>~0.1% area of the Saarland</li>
+								</ul>
+								</aside>
+							<li class="fragment">22 tree species</li>
+						</ul>
+						</div>
+						<div id="standard-map" class="map"  style="float:right; width: 50%; height: 60vh;margin: auto;"></div> 
+					</section>					
+					<section data-state="standard2-map">
+						<div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
+					</section>
+	                <section data-state="hyspex-map">
+	                    <div id="hyspex-map" class="map"  style="margin: auto; width: 100vh; height: 80vh; bottom: 10vh;"></div> 
+	                </section>
+
+	                <section>
+	                	<div id="inventory" style="margin: auto; width: 90vh"></div>
+	                	<div id="wrapper2" style="margin: auto; width: 90vh" > 
+	                  		<div id="invNorth" class="first"  style="height: 20vh"></div>
+	                		<div id="invSouth" class="second"  style="height: 20vh"></div>
+	                	</div>
+	                </section>
+	               	<section>
+	                	<img data-src="img/img1.jpg" style="margin: auto; width: 90vh">
+	                </section>
+	                <section>
+	                	<img data-src="img/img2.jpg" style="margin: auto; width: 90vh">
+	                </section>
+                </section>
+                <section>
+                	<section>	
+                	<h3>Software</h3>
+                	<p>All software used after preprocessing the hyperspectral data is open-source.</p>
+                	<p style="font-size:15px">(And mostly Python)</p>
+                			<img data-src="img/GDALLogoColor.png" style="width: 100px; height: 100px;">
+                			<img data-src="img/Scipylogo.png" style="width: 200px;">
+                			<img data-src="img/Scikit-learn_logo.png"  style="width: 150px;">
+        			</section>
+        			<section>
+        			<h3>Geospatial Data Abstraction Library (GDAL)</h3>
+        				<a href="http://www.gdal.org/"><img data-src="img/GDALLogoColor.png" style="width: 100px; height: 110px;"></a>
+        				<br>
+        				<span>C /C++ Library for reading and writing raster and vector (OGR) geospatial data formats.</span>
+        				<pre><code data-trim data-noescape style="font-size: 15px;">
+        				# Reproject raster
+        				gdalwarp -t_srs "EPSG:4326" input.tif output.tif
+        				# Extract data from a PostGis database to a GeoJSON file
+        				ogr2ogr -f "GeoJSON" file.geojson PG:"host=localhost dbname=database" \
+                         "user=user password=password" -sql "SELECT * from table_name"
+                        </code></pre>
+        			</section>
+        			<section>
+        			<h3>SciPy</h3>
+        				<a href="https://www.scipy.org/"><img data-src="img/Scipylogo.png" style="width: 80px height: 100px;"></a>
+        				<br>
+        				<span>Is an open source Python library used for scientific computing and technical computing.</span>
+        				<pre><code data-trim data-noescape style="font-size: 15px;">
+        						from scipy.signal import savgol_filter
+        						import numpy as np
+        						# scipy.signal.savgol_filter(x, window_length, polyorder)
+        						x = np.array([2, 2, 5, 2, 1, 0, 1, 4, 9])
+        						y = savgol_filter(x, 5, 2)
+        						array([1.66, 3.17, 3.54, 2.86, 0.66, 0.17, 1., 4., 9.])
+						</code></pre>
+        				<br>
+        				<span>Includes: Numpy, pandas, Matplotlib...</span>
+        			</section>
+        			<section>
+        			<h3>scikit-learn</h3>
+        				<a href="http://scikit-learn.org/stable/"><img data-src="img/Scikit-learn_logo.png" style="width: 80px height: 100px;"></a>
+        				<br>
+        				<span>Is an open source Python library that implements a range of machine learning algorithms.</span>
+        				<pre><code data-trim data-noescape style="font-size: 15px;">
+        						from sklearn.ensemble import RandomForestClassifier
+        						import numpy as np
+        						from sklearn import datasets
+        						iris = datasets.load_iris()
+        						clf = RandomForestClassifier(n_estimators=10)
+        						clf.fit(iris.data, iris.target)
+						</code></pre>
+        				<span>Including:  Support vector machines, random forests, gradient boosting, k-means , neural networks.</span>
+        			</section>
+                </section>	
+
+                <section>
+                    <section>
+               			<h3>Data</h3>
+               			<p>Spectral data:</p>
+               			<table style="font-size:30px;">
+               				<thead>
+               					<tr>
+               						<td>Sensor</td>
+               						<td style="font-size:25px">$$\text{Spectral range } (\mu m)$$</td>
+               						<td>Bands</td>
+               					</tr>
+               				</thead>
+               				<tbody>
+               					<tr>
+               					<td>HySpex VNIR-1600</td>
+               					<td>0.4 – 0.992</td>
+               					<td>160</td>
+               					<td></td>
+               					</tr>
+               					<tr>
+               					<td>HySpex SWIR- 320m-e</td>
+               					<td>0.968 – 2.498</td>
+               					<td>256</td>
+               					</tr>
+               				</tbody>
+               				
+               			</table>
+               			<br>
+               			<p>LiDAR data:</p>
+               			<p style="font-size:25px";>Based on data retrieved in  July 2012 with a RIEGL LMS-Q 680 (30-40 points per m² ) and single trees have been segmented by <a href="http://dx.doi.org/10.1016/j.jag.2015.06.008"><span style="font-size:25px">Latifi, et al. (2015)</span></a></p>
+               		</section>
+                	<section>
+               		<h3>Data</h3>
+					<table class="fragment" data-fragment-index="1" style="float: left; width: 50%; font-size:23px;">
+					<thead>
+						<tr>
+							<th colspan="3" style="text-align:center;">Spectral data</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td style="text-align:center;">VNIR</td>
+								<td style="text-align:center;">SWIR</td>
+								<td style="text-align:center;">Vegetation indices</td>
+							</tr>
+							<tr>
+								<td>131 Bands</td>
+								<td>133 Bands</td>
+								<td style="text-align:center;">9 Indices</td>
+							</tr>
+					</tbody>
+					</table>
+					<table class="fragment" data-fragment-index="3" style="float: right; width: 45%; font-size:23px;">
+					<thead>
+						<tr>
+							<th colspan="2" style="text-align:center;">LiDAR data</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td style="text-align:center;">DTM</td>
+								<td style="text-align:center;">Treecount</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;">Elevation</td>
+								<td style="text-align:center;">Stem density</td>
+							</tr>
+					</tbody>
+					</table>
+					<div class="fragment" data-fragment-index="2">
+					<img src="img/spectrumplot.png"  class="plain" style="background:none; border:none; box-shadow:none; width: 50%;float: left;">
+					</div>
+					<div class="fragment" data-fragment-index="4">	
+					<img src="img/treecount.png"  class="plain" style="background:none; border:none; box-shadow:none; width: 50%;float: right;">
+					</div>	
+					</section>
+					<section>
+						<h3>Spectral data preprocessing:</h3>
+						<br>
+							<ol class="fragment">
+								<li>Raw data was processed using CATENA <a href="https://doi.org/10.5194/isprsarchives-XL-1-W1-177-2013"><span style="font-size:20px">[Krauß, et al. (2013)]</span></a></li>
+								<li>BRDF correction using BREFCOR <a href="https://doi.org/10.1109/TGRS.2014.2349946"><span style="font-size:20px">[Schläpfer, et al. (2015)]</span></a></li>
+								<li>Savitzky Golay filtering <a href="https://docs.scipy.org/doc/scipy-0.16.1/reference/generated/scipy.signal.savgol_filter.html"><span style="font-size:20px">[Scipy]</span></a></li>
+								<li>Brightness normalization <a href="http://dx.doi.org/10.1016/j.jqsrt.2010.03.007"><span style="font-size:20px">[Feilhauer, et al. (2010)]</span></a></li>
+								<li>Forest mask</li>
+							</ol>
+					</section>
+					<section>
+						<h3>Spectral training data</h3>
+						<div>
+							<img src="img/spectrumplotpreprocessed.png"  class="plain" style="float:left;padding:0;
+    margin:0; background:none; border:none; box-shadow:none; width:70%">
+						</div>
+						<div style="float: right; width: 30%;position: relative; right:25%;"> 
+							<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
+							<div id="spacor"></div>
+							<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
+							<div id="spacor"></div>
+							<div id="ap" class="box"></div><span class="speciestext">Alnus glutinosa</span>
+							<div id="spacor"></div>
+							<div id="bp" class="box"></div><span class="speciestext">Betula pendula</span>
+							<div id="spacor"></div>
+							<div id="fs" class="box"></div><span class="speciestext">Fagus sylvatica</span>
+							<div id="spacor"></div>
+							<div id="fe" class="box"></div><span class="speciestext">Fraxinus excelsior</span>
+							<div id="spacor"></div>
+							<div id="ld" class="box"></div><span class="speciestext">Larix decidua</span>
+							<div id="spacor"></div>	
+							<div id="pa" class="box"></div><span class="speciestext">Picea abies</span>
+							<div id="spacor"></div>
+							<div id="pmu" class="box"></div><span class="speciestext">Pinus mugo</span>
+							<div id="spacor"></div>
+							<div id="pt" class="box"></div><span class="speciestext">Populus tremula</span>
+							<div id="spacor"></div>						
+							<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
+						</div>
+					</section>
+					<section>
+						<h3>Vegetation indices</h3>
+						<table style="font-size:15px;max-height:70%;">
+							<thead>
+								<tr>
+									<th>Indices</th>
+									<th>Abbrevation</th>
+									<th style="text-align:center;">Formula</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Cellulose Absorption Index</td>
+									<td style="font-weight: bold;">CAI</td>
+									<td>$$0.5 \times ( \lambda_{2005 \mu m} +   \lambda_{2203 \mu m}) - \lambda_{2106 \mu m}$$</td>
+								</tr>
+								<tr>
+									<td>Chlorophyll Index Green</td>
+									<td style="font-weight: bold;">CIG</td>
+									<td>$$\frac{ \lambda_{860 \mu m}}{ \lambda_{545 \mu m}} -1 $$</td>
+								</tr>								
+								<tr>
+									<td>Enhanced Vegetation Index</td>
+									<td style="font-weight: bold;">EVI</td>
+									<td>$$2.5\times {\frac  {( \lambda_{800 \mu m}- \lambda_{660 \mu m})}{(\lambda_{800 \mu m}+6\times \lambda_{660 \mu m}-7.5\times \lambda_{480 \mu m}+1)}}$$</td>
+								</tr>								
+								<tr>
+									<td>Normalized Difference Lignin Index</td>
+									<td style="font-weight: bold;">NDLI</td>
+									<td>$$\frac{\left(log \frac{1}{\lambda_{1754 \mu m}}\right) - \left(log \frac{1}{\lambda_{1680 \mu m}}\right)}{\left(log \frac{1}{\lambda_{1754 \mu m}}\right) + \left(log \frac{1}{\lambda_{1680 \mu m}}\right)}$$</td>
+								</tr>								
+								<tr>
+									<td>Normalized Difference Leaf Mass (per area)</td>
+									<td style="font-weight: bold;">NDLma</td>
+									<td>$$\frac{  \lambda_{2260 \mu m} -   \lambda_{1490 \mu m} }{  \lambda_{2260 \mu m} +   \lambda_{1490 \mu m} }$$</td>
+								</tr>								
+								<tr>
+									<td>Normalized Difference Vegetation Index</td>
+									<td style="font-weight: bold;">NDVI</td>
+									<td>$$\frac{  \lambda_{858 \mu m} -   \lambda_{649 \mu m} }{  \lambda_{858 \mu m} +   \lambda_{649 \mu m} }$$</td>
+								</tr>								
+								<tr>
+									<td>Red Edge NDVI</td>
+									<td style="font-weight: bold;">RENDVI</td>
+									<td>$$\frac{  \lambda_{750 \mu m} -   \lambda_{705 \mu m} }{  \lambda_{750 \mu m}  +  \lambda_{705 \mu m} }$$</td>
+								</tr>								
+								<tr>
+									<td>Red Edge Inflection Point</td>
+									<td style="font-weight: bold;">REIP</td>
+									<td>$$700+40 {\left(\frac{\frac{(\lambda_{670 \mu m}+\lambda_{780 \mu m})}{2} -\lambda_{700\mu m}}{\lambda_{740 \mu m}-\lambda_{700 \mu m}}\right)}$$</td>
+								</tr>								
+								<tr>
+									<td>Modified NDVI</td>
+									<td style="font-weight: bold;">mNDVI</td>
+									<td>$$\frac{  \lambda_{800 \mu m} -   \lambda_{680 \mu m} }{  \lambda_{800 \mu m} +   \lambda_{680 \mu m} - \lambda_{2445 \mu m}}$$</td>
+								</tr>								
+							</tbody>			
+							
+						</table>
+					</section>		
+					<section>
+						<h3>Training data</h3>
+						<div>
+							<table style="font-size:20px">
+								<thead>
+									<tr>
+										<th>Species</th>
+										<th>English</th>
+										<th>Abbrevation</th>
+										<th>Pixels</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+									<td style="font-style: italic!important;">Abies alba</td>
+									<td>European silver fir</td>
+									<td style="text-align:center;">AA</td>
+									<td>543</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Acer pseudoplatanus</td>
+									<td>Sycamore maple</td>
+									<td style="text-align:center;">AP</td>
+									<td>371</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Alnus glutinosa</td>
+									<td>European alder</td>
+									<td style="text-align:center;">AG</td>
+									<td>204</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Betula pendula</td>
+									<td>Silver birch</td>
+									<td style="text-align:center;">BP</td>
+									<td>329</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Fagus sylvatica</td>
+									<td>European beech</td>
+									<td style="text-align:center;">FS</td>
+									<td>1408</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Fraxinus excelsior</td>
+									<td>European ash</td>
+									<td style="text-align:center;">FE</td>
+									<td>386</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Larix decidua</td>
+									<td>European larch</td>
+									<td style="text-align:center;">LD</td>
+									<td>346</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Picea abies</td>
+									<td>Norway spruce</td>
+									<td style="text-align:center;">PA</td>
+									<td>725</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Pinus mugo</td>
+									<td>Mountain pine</td>
+									<td style="text-align:center;">PMu</td>
+									<td>237</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Populus tremula</td>
+									<td>European aspen</td>
+									<td style="text-align:center;">PT</td>
+									<td>120</td>
+									</tr>
+									<tr>
+									<td style="font-style: italic!important;">Pseudotsuga menziesii</td>
+									<td>Douglas fir</td>
+									<td style="text-align:center;">PM</td>
+									<td>106</td>
+									</tr>
+									<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td style="font-size: 15px;">$$\sum \ \ 4775$$</td>
+									</tr>
+								</tbody>
+							</table>
+							<span style="font-size:20px; ">1/4 of this training data is held back for evaluation (Test set)</span>
+						</div>
+					</section>
+                </section>
+
+	            <section>
+	            	<section>
+	            	<h3>Forests of randomized trees</h3>
+	            		<span class="fragment">
+	            		Random forests form a family of methods that consist of building an
+						ensemble ("forest") of decision trees.</span> 
+						<br>
+						<ul style="font-size: 30px;">
+						<li class="fragment">Each tree in the ensemble is built from a sample drawn with replacement (bagging) from the training set</li>
+						<li class="fragment">At each node, the tree splits the data into two nodes</li>
+						<li class="fragment">For splitting, a random subset of attributes/features (random subwindow) is drawn.</li>
+						<li class="fragment">Splits are chosen from the subset of features using a splitting criterion (Gini criterion).</li>
+						<li class="fragment">Trees a grown in full, not pruned</li>
+						<li class="fragment">The scikit-learn implementation combines classifiers by averaging their probabilistic prediction, instead of letting each classifier vote for a single class.</li>
+						</ul>	
+
+	            	</section>
+	            	<section>
+	            		<h3>Why use forests of randomized trees</h3>
+	            		<ul>
+							<li class="fragment">Easy to understand</li>
+							<li class="fragment">Only 2 hyperparameters to tune</li>
+							<li class="fragment">Robust against outliers</li>
+							<li class="fragment">Included feature importance measurement</li>
+							<li class="fragment">Out-of-bag error rate</li>
+							<li class="fragment">Embarrassingly parallel</li>
+						</ul>
+					</section>
+					<section>
+					<p>Number of trees in forest</p>
+					<div>	
+					<img src="img/trees3.png"  style="width: 90%;">	
+					</div>
+					</section>
+					<section>
+					<p>Size of the random subwindow</p>
+					<div>
+					<img src="img/gridSearchAll.png" style="width: 70%;">	
+					</div>
+					</section>
+	            	<section>
+	            		<h3>Feature importance</h3>
+	            		<p>Two ways of computing feature importance for randomized forests:</p>
+	            		<p>Mean decrease in Accuracy (MDA)</p>
+	            		<p>Mean decrease in Impurity (MDI)</p>
+	            	</section>
+	            	<section>
+					<p>Mean decrease in Accuracy (MDA)</p>
+	            	Randomly permuting the values of the feature and measuring the resulting increase in error. 
+	            	<br>
+	            	<br>
+	            	<p class="fragment style="font-size: 30px"><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008)</a> showed that MDA is biased, and that it overestimates the importance of correlated variables </p>
+	            		
+	            	</section>
+	            	<section>
+	            	<p>Mean decrease in Impurity (MDI)</p>
+	            		Calculates each feature importance as the sum over the number of splits (accross all tress) that include the feature, proportionaly to the number of samples it splits.
+	            		<br>
+	            		<br><p  class="fragment" style="font-size: 30px">
+	            		Feature importance based on MDI is biased when using data of varying types or features have different numbers of categories variables<a style="font-size: 20px;" href="https://doi.org/10.1186/1471-2105-8-25"> [Strobl, et al. (2007)]</a>
+	            	</section>
+					<section>
+						<h4>
+							scikit-learn offers two basic types of forests of randomized trees:
+						</h4>
+						<br>
+						<p>Random Forest&reg;<a style="font-size:20px;" href="https://doi.org/10.1023/a:1010933404324"> [Breiman (2001)]</a></p>
+						<p>Extremely Randomized Trees  <a style="font-size:20px;" href="https://doi.org/10.1007/s10994-006-6226-1"> [Geurts, et al. (2006)]</a></p>
+						<p class="fragment" style="font-size: 25px;">Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz<br> 
+						Fitting:<br>
+						RF:   3min 37s10min<br>
+						ET:  0min 22.7s1min
+						<br><br>
+						5 Fold cross validation:<br>
+						RF: 10min 30s <br>
+						ET:1min 28s</p>
+					</section>
+	            </section>
+
+				<section>
+					<section>
+						<h3>Results</h3>
+						<h4 class="fragment">Evaluation based on Cohen's kappa and F1-scores:</h4>
+						<div class="fragment">
+						<p>$$\text{Kappa: }\kappa = (p_o - p_e) / (1 - p_e)$$</p>
+						<p style="font-size:15px">$$p_o \text{is the observed agreement ratio, and}$$ $$p_e\text{is the expected agreement.}$$ </p>
+						<br>
+						</div>
+						<div class="fragment">
+						<p>$$\text{F1 score: } \text{F1} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}$$</p>
+						<p style="font-size:15px">$$\text{precision} = \frac{tp}{tp + fp} \qquad \text{recall} = \frac{tp}{tp + fn}$$ </p>
+						</div>
+						</section>
+						<section>
+							<table style="font-size: 30px;">
+							<tbody>
+							<tr style="height: 102px;">
+							<td style="width: 162px; height: 308px; vertical-align: middle;border: none;font-style: italic;" rowspan="3">&nbsp;&nbsp;&nbsp;<span class="vertical">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual</span></td>
+							<td style="width: 163px; height: 102px;vertical-align:bottom;border: none;"><span class="vertical">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class 1</span></td>
+							<td style="width: 163px; height: 102px;">
+							<p>&nbsp;True positive</p>
+							<p>(tp)</p>
+							</td>
+							<td style="width: 163px; height: 102px;">
+							<p>&nbsp;False positive&nbsp;</p>
+							<p>(fp)</p>
+							</td>
+							</tr>
+							<tr style="height: 103px;">
+							<td style="width: 163px; height: 102px;vertical-align: bottom;border: none;"><span class="vertical">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class 2</span></td>
+							<td style="width: 163px; height: 103px;">
+							<p>&nbsp;False negative</p>
+							<p>(fn)</p>
+							</td>
+							<td style="width: 163px; height: 102px;">
+							<p>&nbsp;True negative 
+							<p>(tn)</p>
+							</td>
+							</tr>
+							<tr style="height: 103px;border: none;">
+							<td style="width: 163px; height: 103px;border: none;">&nbsp;</td>
+							<td style="width: 163px; height: 103px;border: none;">Class 1</td>
+							<td style="width: 163px; height: 103px;border: none;">Class 2</td>
+							</tr>
+							<tr style="height: 103px;">
+							<td style="width: 162px; height: 103px;border: none;">&nbsp;</td>
+							<td style="width: 163px; height: 103px; border: none;font-style: italic" colspan="4">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Predicted</td>
+							</tr>
+							</tbody>
+							</table>
+						</section>
+						<section>
+						<h3>F1-scores:</h3>
+							<table style="font-size: 20px;">
+							<thead><tr><th title="Field #1">Data</th>
+							<th title="Field #2">DTM</th>
+							<th style="border-right: 1px solid white;" title="Field #3">Kappa</th>
+							<th title="Field #4">AA</th>
+							<th title="Field #5">AP</th>
+							<th title="Field #6">AG</th>
+							<th title="Field #7">BP</th>
+							<th title="Field #8">FS</th>
+							<th title="Field #9">FE</th>
+							<th title="Field #10">LD</th>
+							<th title="Field #11">PA</th>
+							<th title="Field #12">PMu</th>
+							<th title="Field #13">PT</th>
+							<th title="Field #14">PM</th>
+							</tr></thead>
+							<tbody"><tr>
+							<td>all</td>
+							<td>True</td>
+							<td style="border-right: 1px solid white;" align="right">0.77</td>
+							<td style="border-bottom: 0px!important;" align="right">0.67</td>
+							<td style="border-bottom: 0px!important;" align="right">0.74</td>
+							<td style="border-bottom: 0px!important;" align="right">0.82</td>
+							<td style="border-bottom: 0px!important;" align="right">0.75</td>
+							<td style="border-bottom: 0px!important;" align="right">0.90</td>
+							<td style="border-bottom: 0px!important;" align="right">0.82</td>
+							<td style="border-bottom: 0px!important;" align="right">0.81</td>
+							<td style="border-bottom: 0px!important;" align="right">0.77</td>
+							<td style="border-bottom: 0px!important;" align="right">0.95</td>
+							<td style="border-bottom: 0px!important;" align="right">0.67</td>
+							<td style="border-bottom: 0px!important;" align="right">0.55</td>
+							</tr>
+							<tr>
+							<td>all</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.64</td>
+							<td style="border-bottom: 0px;" align="right">0.55</td>
+							<td style="border-bottom: 0px;" align="right">0.56</td>
+							<td style="border-bottom: 0px;" align="right">0.58</td>
+							<td style="border-bottom: 0px;" align="right">0.60</td>
+							<td style="border-bottom: 0px;" align="right">0.86</td>
+							<td style="border-bottom: 0px;" align="right">0.69</td>
+							<td style="border-bottom: 0px;" align="right">0.67</td>
+							<td style="border-bottom: 0px;" align="right">0.73</td>
+							<td style="border-bottom: 0px;" align="right">0.86</td>
+							<td style="border-bottom: 0px;" align="right">0.31</td>
+							<td style="border-bottom: 0px;" align="right">0.07</td>
+							</tr>
+							<tr>
+							<td>specind</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.58</td>
+							<td style="border-bottom: 0px;" align="right">0.56</td>
+							<td style="border-bottom: 0px;" align="right">0.29</td>
+							<td style="border-bottom: 0px;" align="right">0.48</td>
+							<td style="border-bottom: 0px;" align="right">0.55</td>
+							<td style="border-bottom: 0px;" align="right">0.80</td>
+							<td style="border-bottom: 0px;" align="right">0.64</td>
+							<td style="border-bottom: 0px;" align="right">0.63</td>
+							<td style="border-bottom: 0px;" align="right">0.65</td>
+							<td style="border-bottom: 0px;" align="right">0.88</td>
+							<td style="border-bottom: 0px;" align="right">0.59</td>
+							<td style="border-bottom: 0px;" align="right">0.14</td>
+							</tr>
+							<tr>
+							<td>spectral</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.55</td>
+							<td style="border-bottom: 0px;" align="right">0.46</td>
+							<td style="border-bottom: 0px;" align="right">0.24</td>
+							<td style="border-bottom: 0px;" align="right">0.47</td>
+							<td style="border-bottom: 0px;" align="right">0.36</td>
+							<td style="border-bottom: 0px;" align="right">0.77</td>
+							<td style="border-bottom: 0px;" align="right">0.64</td>
+							<td style="border-bottom: 0px;" align="right">0.59</td>
+							<td style="border-bottom: 0px;" align="right">0.69</td>
+							<td style="border-bottom: 0px;" align="right">0.92</td>
+							<td style="border-bottom: 0px;" align="right">0.36</td>
+							<td style="border-bottom: 0px;" align="right">0.08</td>
+							</tr>
+							<tr>
+							<td>swir</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.53</td>
+							<td style="border-bottom: 0px;" align="right">0.52</td>
+							<td style="border-bottom: 0px;" align="right">0.32</td>
+							<td style="border-bottom: 0px;" align="right">0.36</td>
+							<td style="border-bottom: 0px;" align="right">0.23</td>
+							<td style="border-bottom: 0px;" align="right">0.74</td>
+							<td style="border-bottom: 0px;" align="right">0.69</td>
+							<td style="border-bottom: 0px;" align="right">0.52</td>
+							<td style="border-bottom: 0px;" align="right">0.71</td>
+							<td style="border-bottom: 0px;" align="right">0.82</td>
+							<td style="border-bottom: 0px;" align="right">0.06</td>
+							<td style="border-bottom: 0px;" align="right">0.00</td>
+							</tr>
+							<tr>
+							<td>swirfull</td>
+							<td>True</td>
+							<td style="border-right: 1px solid white;" align="right">0.80</td>
+							<td style="border-bottom: 0px;" align="right">0.77</td>
+							<td style="border-bottom: 0px;" align="right">0.74</td>
+							<td style="border-bottom: 0px;" align="right">0.85</td>
+							<td style="border-bottom: 0px;" align="right">0.81</td>
+							<td style="border-bottom: 0px;" align="right">0.88</td>
+							<td style="border-bottom: 0px;" align="right">0.88</td>
+							<td style="border-bottom: 0px;" align="right">0.85</td>
+							<td style="border-bottom: 0px;" align="right">0.83</td>
+							<td style="border-bottom: 0px;" align="right">0.96</td>
+							<td style="border-bottom: 0px;" align="right">0.74</td>
+							<td style="border-bottom: 0px;" align="right">0.45</td>
+							</tr>
+							<tr>
+							<td>swirfull</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.63</td>
+							<td style="border-bottom: 0px;"align="right">0.49</td>
+							<td style="border-bottom: 0px;"align="right">0.54</td>
+							<td style="border-bottom: 0px;"align="right">0.67</td>
+							<td style="border-bottom: 0px;"align="right">0.64</td>
+							<td style="border-bottom: 0px;"align="right">0.85</td>
+							<td style="border-bottom: 0px;"align="right">0.74</td>
+							<td style="border-bottom: 0px;"align="right">0.64</td>
+							<td style="border-bottom: 0px;"align="right">0.66</td>
+							<td style="border-bottom: 0px;"align="right">0.91</td>
+							<td style="border-bottom: 0px;"align="right">0.47</td>
+							<td style="border-bottom: 0px;"align="right">0.07</td>
+							</tr>
+							<tr>
+							<td>vnir</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.46</td>
+							<td style="border-bottom: 0px;" align="right">0.37</td>
+							<td style="border-bottom: 0px;" align="right">0.27</td>
+							<td style="border-bottom: 0px;" align="right">0.44</td>
+							<td style="border-bottom: 0px;" align="right">0.29</td>
+							<td style="border-bottom: 0px;" align="right">0.76</td>
+							<td style="border-bottom: 0px;" align="right">0.48</td>
+							<td style="border-bottom: 0px;" align="right">0.53</td>
+							<td style="border-bottom: 0px;" align="right">0.52</td>
+							<td style="border-bottom: 0px;" align="right">0.86</td>
+							<td style="border-bottom: 0px;" align="right">0.28</td>
+							<td style="border-bottom: 0px;" align="right">0.07</td>
+							</tr>
+							<tr>
+							<td>vnirfull</td>
+							<td>True</td>
+							<td style="border-right: 1px solid white;" align="right">0.77</td>
+							<td style="border-bottom: 0px;" align="right">0.71</td>
+							<td style="border-bottom: 0px;" align="right">0.82</td>
+							<td style="border-bottom: 0px;" align="right">0.82</td>
+							<td style="border-bottom: 0px;" align="right">0.74</td>
+							<td style="border-bottom: 0px;" align="right">0.90</td>
+							<td style="border-bottom: 0px;" align="right">0.81</td>
+							<td style="border-bottom: 0px;" align="right">0.80</td>
+							<td style="border-bottom: 0px;" align="right">0.76</td>
+							<td style="border-bottom: 0px;" align="right">0.95</td>
+							<td style="border-bottom: 0px;" align="right">0.72</td>
+							<td style="border-bottom: 0px;" align="right">0.65</td>
+							</tr>
+							<tr>
+							<td>vnirfull</td>
+							<td>False</td>
+							<td style="border-right: 1px solid white;" align="right">0.62</td>
+							<td style="border-bottom: 0px;" align="right">0.47</td>
+							<td style="border-bottom: 0px;" align="right">0.55</td>
+							<td style="border-bottom: 0px;" align="right">0.56</td>
+							<td style="border-bottom: 0px;" align="right">0.65</td>
+							<td style="border-bottom: 0px;" align="right">0.83</td>
+							<td style="border-bottom: 0px;" align="right">0.65</td>
+							<td style="border-bottom: 0px;" align="right">0.63</td>
+							<td style="border-bottom: 0px;" align="right">0.70</td>
+							<td style="border-bottom: 0px;" align="right">0.88</td>
+							<td style="border-bottom: 0px;" align="right">0.53</td>
+							<td style="border-bottom: 0px;" align="right">0.19</td>
+							</tr>
+							</tbody></table>
+						</section>
+					</section>	
+					<section>
+						<section>
+						<h3>Results</h3>
+						<h4>Validation based on spatial distribution and overall percentages:</h4>
+						
+						<div id="inventory2"></div>	
+					
+						</section>	
+						<section data-background="img/Swirfull_BS_False_DTM_True.png" data-background-size="60%", data-state="img-right">
+							<p>SWIR + Spectral indices + LiDAR (swirfull)</p>	
+							<div class="wrapper" style="left: 5%; width: 30%;" > 
+								<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
+								<div id="spacor"></div>
+								<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
+								<div id="spacor"></div>
+								<div id="ap" class="box"></div><span class="speciestext">Alnus glutinosa</span>
+								<div id="spacor"></div>
+								<div id="bp" class="box"></div><span class="speciestext">Betula pendula</span>
+								<div id="spacor"></div>
+								<div id="fs" class="box"></div><span class="speciestext">Fagus sylvatica</span>
+								<div id="spacor"></div>
+								<div id="fe" class="box"></div><span class="speciestext">Fraxinus excelsior</span>
+								<div id="spacor"></div>
+								<div id="ld" class="box"></div><span class="speciestext">Larix decidua</span>
+								<div id="spacor"></div>	
+								<div id="pa" class="box"></div><span class="speciestext">Picea abies</span>
+								<div id="spacor"></div>
+								<div id="pmu" class="box"></div><span class="speciestext">Pinus mugo</span>
+								<div id="spacor"></div>
+								<div id="pt" class="box"></div><span class="speciestext">Populus tremula</span>
+								<div id="spacor"></div>						
+								<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
+							</div>
+							<div id="swirfull" style="position: absolute; right: 52%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+						</section>
+						<section>
+							<p>SWIR + Spectral indices + LiDAR (swirfull)</p>
+							<img src="img/swirfull_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:70%;"">
+						</section>		
+
+						<section data-background="img/All_BS_False_DTM_True.png" data-background-size="55%", data-state="img-right">
+							<p>VNIR + SWIR + Spectral indices + LiDAR (all) </p>	
+							<div class="wrapper" style="left: 5%; width: 30%;" > 
+								<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
+								<div id="spacor"></div>
+								<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
+								<div id="spacor"></div>
+								<div id="ap" class="box"></div><span class="speciestext">Alnus glutinosa</span>
+								<div id="spacor"></div>
+								<div id="bp" class="box"></div><span class="speciestext">Betula pendula</span>
+								<div id="spacor"></div>
+								<div id="fs" class="box"></div><span class="speciestext">Fagus sylvatica</span>
+								<div id="spacor"></div>
+								<div id="fe" class="box"></div><span class="speciestext">Fraxinus excelsior</span>
+								<div id="spacor"></div>
+								<div id="ld" class="box"></div><span class="speciestext">Larix decidua</span>
+								<div id="spacor"></div>	
+								<div id="pa" class="box"></div><span class="speciestext">Picea abies</span>
+								<div id="spacor"></div>
+								<div id="pmu" class="box"></div><span class="speciestext">Pinus mugo</span>
+								<div id="spacor"></div>
+								<div id="pt" class="box"></div><span class="speciestext">Populus tremula</span>
+								<div id="spacor"></div>						
+								<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
+							</div>
+							<!-- <br> -->
+							<div id="alldata" style="position: absolute; right: 50%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+							</section>
+							<section>
+							<p>VNIR + SWIR + Spectral indices + LiDAR (all)</p>
+							<img src="img/all_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:70%;"">
+							</section>		
+
+							<section data-background="img/SWIR_BS_False.png" data-background-size="53%", data-state="img-right">
+							<p>SWIR</p>	
+							<div class="wrapper" style="left: 5%; width: 30%;" > 
+								<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
+								<div id="spacor"></div>
+								<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
+								<div id="spacor"></div>
+								<div id="ap" class="box"></div><span class="speciestext">Alnus glutinosa</span>
+								<div id="spacor"></div>
+								<div id="bp" class="box"></div><span class="speciestext">Betula pendula</span>
+								<div id="spacor"></div>
+								<div id="fs" class="box"></div><span class="speciestext">Fagus sylvatica</span>
+								<div id="spacor"></div>
+								<div id="fe" class="box"></div><span class="speciestext">Fraxinus excelsior</span>
+								<div id="spacor"></div>
+								<div id="ld" class="box"></div><span class="speciestext">Larix decidua</span>
+								<div id="spacor"></div>	
+								<div id="pa" class="box"></div><span class="speciestext">Picea abies</span>
+								<div id="spacor"></div>
+								<div id="pmu" class="box"></div><span class="speciestext">Pinus mugo</span>
+								<div id="spacor"></div>
+								<div id="pt" class="box"></div><span class="speciestext">Populus tremula</span>
+								<div id="spacor"></div>						
+								<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
+							</div>
+							<!-- <br> -->
+							<div id="swirdata" style="position: absolute; right: 50%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+							</section>
+							<section>
+							<p>SWIR</p>
+							<img src="img/swir_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:70%;"">
+							</section>								
+							<section>
+							<p>SWIR normalized confusion matrix</p>
+							<img src="img/species_swir_False_False_CM_norm.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:60%;">
+							</section>		
+					</section>
+				</section>    
+<!-- 				<section data-state="standard-map">
+                    <div id="standard-map" class="map" style="right: 30%; width: 160%; height: 75vh; bottom: 10vh">></div> 
+                </section> -->
+                <section>
+                	<section>
+                		<h3>Additional problems</h3>
+                		<span>BRDF correction</span>
+                		<br>
+                		<img src="img/propabilities_Swirfull_BS_False_DTM_False.png" style="float:left; width:50%;">
+                		<img src="img/probabar.png" style="float:center; width:10%;">
+                		<br><br>
+                		<span style="font-size: 20px;">Picture showing maximum probability for pixel</span>
+            		</section>
+            		<section>
+            		<br>
+                		<img src="img/propabilities_Swirfull_BS_False_DTM_False_zoom1.png"   style="padding:0; margin:0; background:none; border:none; box-shadow:none; width:70%;">
+            		</section>
+            		<section>
+                		<img src="img/hist.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:60%;">
+            		</section>
+
+
+
+                </section>
+
+                <section>
+                	<h1>The End...</h1>
+                	<br>
+                	<h3>Sources:</h3>
+                	<div style="font-size:25px">
+                	<p><a href="https://doi.org/10.1023/a:1010933404324">Breiman, Leo (2001). "Random Forests" In: Machine Learning 45.1, pp. 5–32.</p>
+                	<p><a href="https://doi.org/10.1007/s10994-006-6226-1">Geurts, et al. (2006). “Extremely randomized trees”. In: Machine Learning 63.1, pp. 3–42.</p>
+                   	<p><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008). “Conditional Variable Importance for Random Forests”. In: BMC Bioinformatics 9.1 </a>         		
+                	</p>
+                	<p><a href=" https://arxiv.org/abs/1407.7502v3">Louppe, Gilles (2014). “Understanding Random Forests: From Theory to Practice”. PhD thesis. University of Liège, Belgium.</a></p>
+                	</div>
+                </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="src/leaflet/leaflet.js"></script>
+		<script src="js/pres.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+		<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+   				integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  				crossorigin="anonymous">
+	
+		<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/highcharts.js"></script> -->
+		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/themes/dark-unica.js"></script> -->
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<!-- <script type="text/javascript" src="/src/highcharts/js/highcharts.js"></script> -->
+		<script src="js/leaflet.zoomhome.min.js"></script>
+
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				zoomKey: 'x',
+				slideNumber: true,
+				center: false,
+				enableSpeakerNotes: true,
+				viewDistance: 5,
+
+				// Enable the slide overview mode
+				overview: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				math: {
+						mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+						config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+					},
+
+
+				dependencies: [
+					{ src: 'plugin/math/math.js', async: true },
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+			// Reveal.configure({ pdfMaxPagesPerSlide: 1 })
+
+
+			function runOnState(state, o) {
+                Reveal.addEventListener(state, function(e) {
+                    var removeListener = function() {
+                        o.stop();
+                        Reveal.removeEventListener('slidechanged', removeListener);
+                    }
+                    o.start();
+                    setTimeout(function() {
+                        Reveal.addEventListener('slidechanged', removeListener);
+                    }, 0);
+                });
+            }
+
+
+            runOnState('hyspex-map', window.hyspexMap);
+            runOnState('standard-map', window.standardMap);
+            runOnState('standard2-map', window.standardMap2);
+
+   //          Reveal.addEventListener( 'slidechanged', function( event ) {
+			//     redrawChart();     
+			// } );
+		</script>
+		<script type="text/javascript">
+		// Reveal.addEventListener( 'slidechanged', function( event ) {
+		// 	console.log(Reveal.getState());
+		// });
+
+
+	
+						Highcharts.chart('swir', {
+				            chart: {
+				                plotBackgroundColor: null,
+				                plotBorderWidth: null,
+				                plotShadow: false,
+				                backgroundColor: '#222222',
+				                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+				                // color: "#f00",
+				                // fontFamily: 'serif',
+				                type: 'column'
+				            },
+
+				            exporting: {
+				                enabled: false
+				            },
+				            credits: {
+				                enabled: false
+				            },          
+				            title: {
+				                text: 'Predicted percentages'
+				            },
+				            tooltip: {
+				                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				            },
+
+
+				            labels: {
+				            	color: '#fff'
+
+				            },
+
+				            xAxis: {
+				                type: 'category'
+
+				            },
+				            yAxis: {
+					            	title: { text: 'Percentage' },
+
+
+					         },
+
+				            plotOptions: {
+				                    series: {
+				                        allowOverlap: true,
+				                        showInLegend: false,
+				                        borderWidth: 0,
+				                        dataLabels: {
+				                            enabled: true,
+					 						style: {
+						                        color: 'white',
+						                        fontSize: '8px',
+						                        textShadow: '0px 1px 2px #33333'
+						                    	},
+				                            format: '{point.y:.2f}%'
+				                        }
+				                    }
+				                },
+
+
+				            series: [{
+				                name: 'Species',
+				                colorByPoint: true,
+				                data: [{
+
+
+				                    name: 'Abies alba',
+				                    y: 8.77,
+				                    color: '#1f78b4'
+				                 
+				                }, {
+				                    name: 'Acer pseudoplatanus',
+				                    y: 1.36,
+				                    color: '#17BECF'
+				                }, {
+				                    name: 'Alnus glutinosa',
+				                    y: 0.43,
+				                    color: '#ff7f0e'
+				                }, {
+				                    name: 'Betula pendula',
+				                    y: 2.04,
+				                    color: '#ffbb78'
+				                }, {
+				                    name: 'Fagus sylvatica',
+				                    y: 28.87,
+				                    color: '#2ca02c'
+				                }, {
+				                    name: 'Fraxinus excelsior',
+				                    y: 1.34,
+				                    color: '#98df8a'
+				                }, {
+				                    name: 'Larix decidua',
+				                    y: 4.47,
+				                    color: '#d62728'
+				                }, {
+				                    name: 'Picea abies',
+				                    y: 50.15,
+				                    color: '#ff9896'
+				                }, {
+				                    name: 'Pinus mugo',
+				                    y: 2.53,
+				                    color: '#9467bd'
+				                }, {
+				                    name: 'Populus tremula',
+				                    y: 0.02,
+				                    color: '#c5b0d5'
+				                }, {
+				                    name: 'Pseudotsuga menziesii',
+				                    y: 0.02,
+				                    color: '#8c564b'
+
+				                }]
+				            }]
+					        })
+
+
+	Highcharts.chart('swirfull', {
+	            chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false,
+	                backgroundColor: '#222222',
+	                type: 'column'
+	            },
+
+	            exporting: {
+	                enabled: false
+	            },
+	            credits: {
+	                enabled: false
+	            },          
+	            title: {
+	                text: 'Predicted percentages'
+	            },
+	            tooltip: {
+	                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+	            },
+
+
+	            labels: {
+	            	color: '#fff'
+
+	            },
+
+	            xAxis: {
+	                type: 'category'
+
+	            },
+	            yAxis: {
+	            	title: { text: 'Percentage' },
+	            	tickInterval: 50,
+	            	min: 0, 
+	            	max: 100
+
+
+	            },
+
+	            plotOptions: {
+	                    series: {
+	                        allowOverlap: true,
+	                        showInLegend: false,
+	                        borderWidth: 0,
+	                        dataLabels: {
+	                            enabled: true,
+		 						style: {
+			                        color: 'white',
+			                        fontSize: '8px',
+			                        textShadow: '0px 1px 2px #33333'
+			                    	},
+	                            format: '{point.y:.2f}%'
+	                        }
+	                    }
+	                },
+
+
+	            series: [{
+	                name: 'Species',
+	                colorByPoint: true,
+	                data: [{
+
+
+	                    name: 'Abies alba',
+	                    y: 9.38,
+	                    color: '#1f78b4'
+	                }, {
+	                    name: 'Acer pseudoplatanus',
+	                    y: 4.55,
+	                    color: '#17BECF'
+	                }, {
+	                    name: 'Alnus glutinosa',
+	                    y: 1.5,
+	                    color: '#ff7f0e'
+	                }, {
+	                    name: 'Betula pendula',
+	                    y: 0.45,
+	                    color: '#ffbb78'
+	                }, {
+	                    name: 'Fagus sylvatica',
+	                    y: 27.11,
+	                    color: '#2ca02c'
+	                }, {
+	                    name: 'Fraxinus excelsior',
+	                    y: 5.66,
+	                    color: '#98df8a'
+	                }, {
+	                    name: 'Larix decidua',
+	                    y: 4.07,
+	                    color: '#d62728'
+	                }, {
+	                    name: 'Picea abies',
+	                    y: 43.07,
+	                    color: '#ff9896'
+	                }, {
+	                    name: 'Pinus mugo',
+	                    y: 2.27,
+	                    color: '#9467bd'
+	                }, {
+	                    name: 'Populus tremula',
+	                    y: 0.08,
+	                    color: '#c5b0d5'
+	                }, {
+	                    name: 'Pseudotsuga menziesii',
+	                    y: 1.13,
+	                    color: '#8c564b'
+
+	                }]
+	            }]
+	        })
+
+
+	Highcharts.chart('swirdata', {
+	            chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false,
+	                backgroundColor: '#222222',
+	                type: 'column'
+	            },
+
+	            exporting: {
+	                enabled: false
+	            },
+	            credits: {
+	                enabled: false
+	            },          
+	            title: {
+	                text: 'Predicted percentages'
+	            },
+	            tooltip: {
+	                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+	            },
+
+
+	            labels: {
+	            	color: '#fff'
+
+	            },
+
+	            xAxis: {
+	                type: 'category'
+
+	            },
+	            yAxis: {
+	            	title: { text: 'Percentage' },
+	            	tickInterval: 50,
+	            	min: 0, 
+	            	max: 100
+
+
+	            },
+
+	            plotOptions: {
+	                    series: {
+	                        allowOverlap: true,
+	                        showInLegend: false,
+	                        borderWidth: 0,
+	                        dataLabels: {
+	                            enabled: true,
+		 						style: {
+			                        color: 'white',
+			                        fontSize: '8px',
+			                        textShadow: '0px 1px 2px #33333'
+			                    	},
+	                            format: '{point.y:.2f}%'
+	                        }
+	                    }
+	                },
+
+
+	            series: [{
+	                name: 'Species',
+	                colorByPoint: true,
+	                data: [{
+
+
+	                    name: 'Abies alba',
+	                    y: 8.77,
+	                    color: '#1f78b4'
+	                }, {
+	                    name: 'Acer pseudoplatanus',
+	                    y: 1.36,
+	                    color: '#17BECF'
+	                }, {
+	                    name: 'Alnus glutinosa',
+	                    y: 0.43,
+	                    color: '#ff7f0e'
+	                }, {
+	                    name: 'Betula pendula',
+	                    y: 2.04,
+	                    color: '#ffbb78'
+	                }, {
+	                    name: 'Fagus sylvatica',
+	                    y: 28.87,
+	                    color: '#2ca02c'
+	                }, {
+	                    name: 'Fraxinus excelsior',
+	                    y: 1.34,
+	                    color: '#98df8a'
+	                }, {
+	                    name: 'Larix decidua',
+	                    y: 4.74,
+	                    color: '#d62728'
+	                }, {
+	                    name: 'Picea abies',
+	                    y: 50.15,
+	                    color: '#ff9896'
+	                }, {
+	                    name: 'Pinus mugo',
+	                    y: 2.53,
+	                    color: '#9467bd'
+	                }, {
+	                    name: 'Populus tremula',
+	                    y: 0.02,
+	                    color: '#c5b0d5'
+	                }, {
+	                    name: 'Pseudotsuga menziesii',
+	                    y: 0.02,
+	                    color: '#8c564b'
+
+	                }]
+	            }]
+	        })
+
+
+	Highcharts.chart('alldata', {
+	            chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false,
+	                backgroundColor: '#222222',
+	                type: 'column'
+	            },
+
+	            exporting: {
+	                enabled: false
+	            },
+	            credits: {
+	                enabled: false
+	            },          
+	            title: {
+	                text: 'Predicted percentages'
+	            },
+	            tooltip: {
+	                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+	            },
+
+
+	            labels: {
+	            	color: '#fff'
+
+	            },
+
+	            xAxis: {
+	                type: 'category'
+
+	            },
+	            yAxis: {
+	            	title: { text: 'Percentage' },
+	            	tickInterval: 50,
+	            	min: 0, 
+	            	max: 100
+
+
+	            },
+
+	            plotOptions: {
+	                    series: {
+	                        allowOverlap: true,
+	                        showInLegend: false,
+	                        borderWidth: 0,
+	                        dataLabels: {
+	                            enabled: true,
+		 						style: {
+			                        color: 'white',
+			                        fontSize: '8px',
+			                        textShadow: '0px 1px 2px #33333'
+			                    	},
+	                            format: '{point.y:.2f}%'
+	                        }
+	                    }
+	                },
+
+
+	            series: [{
+	                name: 'Species',
+	                colorByPoint: true,
+	                data: [{
+
+
+	                    name: 'Abies alba',
+	                    y: 15.56,
+	                    color: '#1f78b4'
+	                }, {
+	                    name: 'Acer pseudoplatanus',
+	                    y: 3.87,
+	                    color: '#17BECF'
+	                }, {
+	                    name: 'Alnus glutinosa',
+	                    y: 2.29,
+	                    color: '#ff7f0e'
+	                }, {
+	                    name: 'Betula pendula',
+	                    y: 0.87,
+	                    color: '#ffbb78'
+	                }, {
+	                    name: 'Fagus sylvatica',
+	                    y: 30.56,
+	                    color: '#2ca02c'
+	                }, {
+	                    name: 'Fraxinus excelsior',
+	                    y: 6.82,
+	                    color: '#98df8a'
+	                }, {
+	                    name: 'Larix decidua',
+	                    y: 2.8,
+	                    color: '#d62728'
+	                }, {
+	                    name: 'Picea abies',
+	                    y: 35.22,
+	                    color: '#ff9896'
+	                }, {
+	                    name: 'Pinus mugo',
+	                    y: 1.57,
+	                    color: '#9467bd'
+	                }, {
+	                    name: 'Populus tremula',
+	                    y: 0.07,
+	                    color: '#c5b0d5'
+	                }, {
+	                    name: 'Pseudotsuga menziesii',
+	                    y: 0.35,
+	                    color: '#8c564b'
+
+	                }]
+	            }]
+	        })
+
+
+
+		Highcharts.chart('inventory', {
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false,
+		                backgroundColor: '#222222',
+		                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+		                // color: "#f00",
+		                // fontFamily: 'serif',
+		                type: 'column'
+		            },
+
+		            exporting: {
+		                enabled: false
+		            },
+		            credits: {
+		                enabled: false
+		            },          
+		            title: {
+		                text: 'Inventory 2002/2003'
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+
+
+		            xAxis: {
+		                type: 'category'
+		            },
+		            yAxis: {
+		            	title: { text: 'Percentage' },
+
+
+		            },
+
+		            plotOptions: {
+		                    series: {
+		                    	showInLegend: false,
+		                        allowOverlap: true,
+		                        borderWidth: 0,
+		                        dataLabels: {
+		                            enabled: true,
+		                            style: {
+			                        color: 'white',
+			                        textShadow: '0px 1px 2px #33333'},
+		                            format: '{point.y:.1f}%'
+		                        }
+		                    }
+		                },
+
+
+		            series: [{
+		                name: 'Species',
+		                colorByPoint: true,
+		                data: [{
+
+
+		                    name: 'Abies alba',
+		                    y: 2.6,
+		                    color: '#1f78b4'
+		                 
+		                }, {
+		                    name: 'Acer pseudoplatanus',
+		                    y: 1.2,
+		                    color: '#17BECF'
+		                }, {
+		                    name: 'Alnus glutinosa',
+		                    y: 0,
+		                    color: '#ff7f0e'
+		                }, {
+		                    name: 'Betula pendula',
+		                    y: 0.7,
+		                    color: '#ffbb78'
+		                }, {
+		                    name: 'Fagus sylvatica',
+		                    y: 24.5,
+		                    color: '#2ca02c'
+		                }, {
+		                    name: 'Fraxinus excelsior',
+		                    y: 0.1,
+		                    color: '#98df8a'
+		                }, {
+		                    name: 'Larix decidua',
+		                    y: 0.1,
+		                    color: '#d62728'
+		                }, {
+		                    name: 'Picea abies',
+		                    y: 67.00,
+		                    color: '#ff9896'
+		                }, {
+		                    name: 'Pinus mugo',
+		                    y: 0.1,
+		                    color: '#9467bd'
+		                }, {
+		                    name: 'Populus tremula',
+		                    y: 0.1,
+		                    color: '#c5b0d5'
+		                }, {
+		                    name: 'Pseudotsuga menziesii',
+		                    y: 0.2,
+		                    color: '#8c564b'
+
+		                }]
+		            }]
+		        })
+			
+
+
+
+		Highcharts.chart('inventory2', {
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false,
+		                backgroundColor: '#222222',
+		                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+		                // color: "#f00",
+		                // fontFamily: 'serif',
+		                type: 'column'
+		            },
+
+		            exporting: {
+		                enabled: false
+		            },
+		            credits: {
+		                enabled: false
+		            },          
+		            title: {
+		                text: 'Inventory 2002/2003'
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+
+
+		            xAxis: {
+		                type: 'category'
+		            },
+		            yAxis: {
+		            	title: { text: 'Percentage' },
+
+
+		            },
+
+		            plotOptions: {
+		                    series: {
+		                    	showInLegend: false,
+		                        allowOverlap: true,
+		                        borderWidth: 0,
+		                        dataLabels: {
+		                            enabled: true,
+		                            style: {
+			                        color: 'white',
+			                        textShadow: '0px 1px 2px #33333'},
+		                            format: '{point.y:.1f}%'
+		                        }
+		                    }
+		                },
+
+
+		            series: [{
+		                name: 'Species',
+		                colorByPoint: true,
+		                data: [{
+
+
+		                    name: 'Abies alba',
+		                    y: 2.6,
+		                    color: '#1f78b4'
+		                 
+		                }, {
+		                    name: 'Acer pseudoplatanus',
+		                    y: 1.2,
+		                    color: '#17BECF'
+		                }, {
+		                    name: 'Alnus glutinosa',
+		                    y: 0,
+		                    color: '#ff7f0e'
+		                }, {
+		                    name: 'Betula pendula',
+		                    y: 0.7,
+		                    color: '#ffbb78'
+		                }, {
+		                    name: 'Fagus sylvatica',
+		                    y: 24.5,
+		                    color: '#2ca02c'
+		                }, {
+		                    name: 'Fraxinus excelsior',
+		                    y: 0.1,
+		                    color: '#98df8a'
+		                }, {
+		                    name: 'Larix decidua',
+		                    y: 0.1,
+		                    color: '#d62728'
+		                }, {
+		                    name: 'Picea abies',
+		                    y: 67.00,
+		                    color: '#ff9896'
+		                }, {
+		                    name: 'Pinus mugo',
+		                    y: 0.1,
+		                    color: '#9467bd'
+		                }, {
+		                    name: 'Populus tremula',
+		                    y: 0.1,
+		                    color: '#c5b0d5'
+		                }, {
+		                    name: 'Pseudotsuga menziesii',
+		                    y: 0.2,
+		                    color: '#8c564b'
+
+		                }]
+		            }]
+		        })
+		
+
+	Highcharts.chart('invNorth', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        backgroundColor: '#222222',
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Species compositon northern part'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },    
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                style: {
+		                    color: 'white',
+		                    fontSize: '10px',
+		                    fontWeight: 'bold',
+		                    textShadow: '0px 1px 2px #33333'
+		                    },
+	            }
+	        }
+	    },
+	    series: [{
+
+	        name: 'North',
+	        colorByPoint: true,
+	        data: [{
+	            name: 'Picea abies',
+	            y: 24.4,
+	            color: '#ff9896'
+	        }, {
+	            name: 'Picea abies & other Conifers',
+	            y: 1.5,
+	            color: '#f28e2b'
+	        }, {
+	            name: 'Picea abies & Fagus sylvatica',
+	            y: 43.7,
+	            color: '#76b7b2'
+	        }, {
+	            name: 'Picea abies & other Broadleaf',
+	            y: 2.4,
+	            color: '#7f4c4b'
+	        }, {
+	            name: 'Mixed mountainous forest',
+	            y: 9,
+	            color: '#bcbd22'
+
+	        }, 
+
+	        {
+	            name: 'Hardwood & other Broadleaf',
+	            y: 0.3,
+	            color: '#73d8e2'
+	        },
+	        {
+	            name: 'Fagus sylvatica',
+	            color: '#2ca02c',
+	            y: 17.7
+	        }]
+	    }]
+	        });
+	
+
+	Highcharts.chart('invSouth', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        backgroundColor: '#222222',
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Species compositon southern part'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+
+
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },    
+
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.2f} %',
+	                style: {
+		                    color: 'white',
+		                    fontSize: '10px',
+		                    textShadow: false
+		                    },
+	            }
+	        }
+	    },
+	    series: [{
+	        name: 'South',
+	        colorByPoint: true,
+	        data: [
+
+	   {
+
+	            name: 'Picea abies & Fagus sylvatica',
+	            y: 26,
+	            color: '#76b7b2'
+	        }, {
+
+	            name: 'Picea abies & other Broadleaf',
+	            y: 25.3,
+	            color: '#7f4c4b'
+	        }, {
+
+	            name: 'Mixed mountainous forest',
+	            y: 15.4,
+	            color: '#bcbd22'
+
+	        }, {
+
+	            
+	            name: 'Picea abies & other Conifers',
+	            y: 1.9,
+	            color: '#f28e2b'
+	        }, {
+
+	            name: 'Fagus sylvatica & Picea abies',
+	            y: 18.4,
+	            color: '#80c680'
+	        },{
+
+	            name: 'Hardwood & other Broadleaf',
+	            y: 1.7,
+	            color: '#73d8e2'
+	        },
+	         {
+	            name: 'Picea abies',
+	            y: 10.1,
+	            color: '#ff9896'
+	        }, 
+	        {
+	            name: 'Fagus sylvatica',
+	            y: 1.2,
+	            color: '#2ca02c'
+	        }]
+	    }]
+        });
+		
+
+
+		</script>
+	</body>
+</html>
