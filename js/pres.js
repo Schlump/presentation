@@ -188,6 +188,7 @@ window.hyspexMap = (function() {
             zoomHome.addTo(map);
 
         map.addLayer(grenze)
+        map.addLayer(area2013)
         L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
