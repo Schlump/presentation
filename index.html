@@ -174,10 +174,10 @@
 							<li class="fragment">22 tree species</li>
 						</ul>
 						</div>
-						<div id="standard-map" class="map"  style="float:right; width: 50vh; height: 60vh;margin: auto;"></div> 
+						<div id="standard-map" class="map"  style="float:right; width: 50%; height: 60vh;margin: auto;"></div> 
 					</section>					
 					<section data-state="standard2-map">
-						<div id="standard2-map" class="map"  style="margin: auto; width: 100vh; height: 50vh;margin: auto;"></div> 
+						<div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
 					</section>
 	                <section data-state="hyspex-map">
 	                    <div id="hyspex-map" class="map"  style="margin: auto; width: 100vh; height: 80vh; bottom: 10vh;"></div> 
@@ -516,6 +516,7 @@
 									</tr>
 								</tbody>
 							</table>
+							<span style="font-size:20px; ">1/4 of this training data is held back for evaluation (Test set)</span>
 						</div>
 					</section>
                 </section>
@@ -545,16 +546,19 @@
 							<li class="fragment">Robust against outliers</li>
 							<li class="fragment">Included feature importance measurement</li>
 							<li class="fragment">Out-of-bag error rate</li>
+							<li class="fragment">Embarrassingly parallel</li>
 						</ul>
 					</section>
 					<section>
+					<p>Number of trees in forest</p>
 					<div>	
 					<img src="img/trees3.png"  style="width: 90%;">	
 					</div>
 					</section>
 					<section>
+					<p>Size of the random subwindow</p>
 					<div>
-					<img src="img/gridSearchAll.png" style="width: 90%;">	
+					<img src="img/gridSearchAll.png" style="width: 70%;">	
 					</div>
 					</section>
 	            	<section>
@@ -598,7 +602,7 @@
 				<section>
 					<section>
 						<h3>Results</h3>
-						<h4 class="fragment">Evaluation based on Kappa and F1-scores:</h4>
+						<h4 class="fragment">Evaluation based on Cohen's kappa and F1-scores:</h4>
 						<div class="fragment">
 						<p>$$\text{Kappa: }\kappa = (p_o - p_e) / (1 - p_e)$$</p>
 						<p style="font-size:15px">$$p_o \text{is the observed agreement ratio, and}$$ $$p_e\text{is the expected agreement.}$$ </p>
@@ -918,7 +922,7 @@
 								<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 							</div>
 							<!-- <br> -->
-							<div id="swirdata" style="position: absolute; right: 72%; width: 40vh; height: 25vh; top: 320%; max-width: 45%;"></div>
+							<div id="swirdata" style="position: absolute; right: 72%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
 							</section>
 					</section>
 				</section>    
