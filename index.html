@@ -191,33 +191,52 @@
                 	<h3>Software</h3>
                 	<p>All software used after preprocessing the hyperspectral data is open-source.</p>
                 	<p style="font-size:15px">(And mostly Python)</p>
-                			<img data-src="img/GDALLogoColor.png" class="fragment" style="width: 100px; height: 100px;">
-                			<img data-src="img/Scipylogo.png" class="fragment" style="width: 200px;">
-                			<img data-src="img/Scikit-learn_logo.png" class="fragment" style="width: 150px;">
+                			<img data-src="img/GDALLogoColor.png" style="width: 100px; height: 100px;">
+                			<img data-src="img/Scipylogo.png" style="width: 200px;">
+                			<img data-src="img/Scikit-learn_logo.png"  style="width: 150px;">
         			</section>
         			<section>
         			<h3>Geospatial Data Abstraction Library (GDAL)</h3>
         				<a href="http://www.gdal.org/"><img data-src="img/GDALLogoColor.png" style="width: 100px; height: 110px;"></a>
         				<br>
         				<span>C /C++ Library for reading and writing raster and vector (OGR) geospatial data formats.</span>
-        				<span></span>
+        				<pre><code data-trim data-noescape style="font-size: 15px;">
+        				# Reproject raster
+        				gdalwarp -t_srs "EPSG:4326" input.tif output.tif
+        				# Extract data from a PostGis database to a GeoJSON file
+        				ogr2ogr -f "GeoJSON" file.geojson PG:"host=localhost dbname=database" \
+                         "user=user password=password" -sql "SELECT * from table_name"
+                        </code></pre>
         			</section>
         			<section>
         			<h3>SciPy</h3>
         				<a href="https://www.scipy.org/"><img data-src="img/Scipylogo.png" style="width: 80px height: 100px;"></a>
         				<br>
         				<span>Is an open source Python library used for scientific computing and technical computing.</span>
+        				<pre><code data-trim data-noescape style="font-size: 15px;">
+        						from scipy.signal import savgol_filter
+        						import numpy as np
+        						# scipy.signal.savgol_filter(x, window_length, polyorder)
+        						x = np.array([2, 2, 5, 2, 1, 0, 1, 4, 9])
+        						y = savgol_filter(x, 5, 2)
+        						array([1.66, 3.17, 3.54, 2.86, 0.66, 0.17, 1., 4., 9.])
+						</code></pre>
         				<br>
-        				<br>
-        				<span>Includes: Numpy,pandas,Matplotlib...</span>
+        				<span>Includes: Numpy, pandas, Matplotlib...</span>
         			</section>
         			<section>
         			<h3>scikit-learn</h3>
         				<a href="http://scikit-learn.org/stable/"><img data-src="img/Scikit-learn_logo.png" style="width: 80px height: 100px;"></a>
         				<br>
         				<span>Is an open source Python library that implements a range of machine learning algorithms.</span>
-        				<br>
-        				<br>
+        				<pre><code data-trim data-noescape style="font-size: 15px;">
+        						from sklearn.ensemble import RandomForestClassifier
+        						import numpy as np
+        						from sklearn import datasets
+        						iris = datasets.load_iris()
+        						clf = RandomForestClassifier(n_estimators=10)
+        						clf.fit(iris.data, iris.target)
+						</code></pre>
         				<span>Including:  Support vector machines, random forests, gradient boosting, k-means , neural networks.</span>
         			</section>
                 </section>	
@@ -541,10 +560,11 @@
 					</section>
 					<section>
 						<h3>
-							scikit-learn offers two basic types of random forests.
+							scikit-learn offers two basic types of random forests:
 						</h3>
-						<p>Random Forest [Breiman, (2001)]
-						<p>Extremely Randomized Trees [Geurts, et al. (2006)]</p>
+						<br>
+						<p>Random Forest  <a style="font-size:20px;" href="https://doi.org/10.1023/a:1010933404324"> [Breiman, (2001)]</a></p>
+						<p>Extremely Randomized Trees  <a style="font-size:20px;" href="https://doi.org/10.1007/s10994-006-6226-1"> [Geurts, et al. (2006)]</a></p>
 					</section>
 	            </section>
 
