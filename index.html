@@ -545,7 +545,7 @@
 	            		<h3>Why use forests of randomized trees</h3>
 	            		<ul>
 							<li class="fragment">Easy to understand</li>
-							<li class="fragment">Only 2 hyperparamteres to tune</li>
+							<li class="fragment">Only 2 hyperparameters to tune</li>
 							<li class="fragment">Robust against outliers</li>
 							<li class="fragment">Included feature importance measurement</li>
 							<li class="fragment">Out-of-bag error rate</li>
@@ -566,24 +566,25 @@
 					</section>
 	            	<section>
 	            		<h3>Feature importance</h3>
-	            		<p>Two ways of computing feature importance for randomized forets:</p>
-	            		 <p>Mean decrease in Accuracy (MDA)</p>
+	            		<p>Two ways of computing feature importance for randomized forests:</p>
+	            		<p>Mean decrease in Accuracy (MDA)</p>
 	            		<p>Mean decrease in Impurity (MDI)</p>
 	            	</section>
 	            	<section>
-	            	<p>Mean decrease in Accuracy (MDA)</p>
-	            		Calculates each feature importance as the sum over the number of splits (accross all tress) that include the feature, proportionaly to the number of samples it splits.
-	            		
-	            	</section>
-	            	<section>
 					<p>Mean decrease in Accuracy (MDA)</p>
-	            	randomly permuting the values of the feature and measuring the resulting increase in error. The influence of the correlated features is also removed.
+	            	Randomly permuting the values of the feature and measuring the resulting increase in error. 
+	            	<br>
+	            	<br>
+	            	<p class="fragment style="font-size: 30px"><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008)</a> showed that MDA is biased, and that it overestimates the importance of correlated variables </p>
 	            		
 	            	</section>
 	            	<section>
-	            		<p>Strobl et al. (2008) later showed that MDA is biased as
-						well, and that it overestimates the importance of correlated variables </p>
-					</section>
+	            	<p>Mean decrease in Impurity (MDI)</p>
+	            		Calculates each feature importance as the sum over the number of splits (accross all tress) that include the feature, proportionaly to the number of samples it splits.
+	            		<br>
+	            		<br><p  class="fragment" style="font-size: 30px">
+	            		Feature importance based on MDI is biased when using data of varying types or features have different numbers of categories variables<a style="font-size: 20px;" href="https://doi.org/10.1186/1471-2105-8-25"> [Strobl, et al. (2007)]</a>
+	            	</section>
 					<section>
 						<h4>
 							scikit-learn offers two basic types of forests of randomized trees:
@@ -839,12 +840,13 @@
 						<section>
 						<h3>Results</h3>
 						<h4>Validation based on spatial distribution and overall percentages:</h4>
-						<div id="inventory" style="margin: auto; width: 90vh"></div>	
+						
+						<div id="inventory2"></div>	
 					
 						</section>	
-						<section data-background="img/Swirfull_BS_False_DTM_True.png" data-background-size="60%">
-							<p>SWIR + Spectral indices + LiDAR </p>	
-							<div class="wrapper" style="right: 30%;" > 
+						<section data-background="img/Swirfull_BS_False_DTM_True.png" data-background-size="60%", data-state="img-right">
+							<p>SWIR + Spectral indices + LiDAR (swirfull)</p>	
+							<div class="wrapper" style="left: 5%; width: 30%;" > 
 								<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
 								<div id="spacor"></div>
 								<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
@@ -867,12 +869,16 @@
 								<div id="spacor"></div>						
 								<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 							</div>
-							<div id="swirfull" style="position: absolute; right: 72%; width: 40vh; height: 25vh; top: 320%; max-width: 45%;"></div>
+							<div id="swirfull" style="position: absolute; right: 52%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+						</section>
+						<section>
+							<p>SWIR + Spectral indices + LiDAR (swirfull)</p>
+							<img src="img/swirfull_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:70%;"">
 						</section>		
 
-						<section data-background="img/All_BS_False_DTM_True.png" data-background-size="55%">
-							<p>VNIR + SWIR + Spectral indices + LiDAR </p>	
-							<div class="wrapper" style="right: 30%;" > 
+						<section data-background="img/All_BS_False_DTM_True.png" data-background-size="55%", data-state="img-right">
+							<p>VNIR + SWIR + Spectral indices + LiDAR (all) </p>	
+							<div class="wrapper" style="left: 5%; width: 30%;" > 
 								<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
 								<div id="spacor"></div>
 								<div id="ap" class="box"></div><span class="speciestext">Acer pseudoplatanus</span>
@@ -896,10 +902,14 @@
 								<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 							</div>
 							<!-- <br> -->
-							<div id="alldata" style="position: absolute; right: 72%; width: 40vh; height: 25vh; top: 320%; max-width: 45%;"></div>
+							<div id="alldata" style="position: absolute; right: 50%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
 							</section>
+							<section>
+							<p>VNIR + SWIR + Spectral indices + LiDAR (all)</p>
+							<img src="img/all_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:70%;"">
+							</section>		
 
-							<section data-background="img/SWIR_BS_False.png" data-background-size="55%", data-state="img-right">
+							<section data-background="img/SWIR_BS_False.png" data-background-size="53%", data-state="img-right">
 							<p>SWIR</p>	
 							<div class="wrapper" style="left: 5%; width: 30%;" > 
 								<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
@@ -927,19 +937,49 @@
 							<!-- <br> -->
 							<div id="swirdata" style="position: absolute; right: 50%; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
 							</section>
+							<section>
+							<p>SWIR</p>
+							<img src="img/swir_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:70%;"">
+							</section>								
+							<section>
+							<p>SWIR normalized confusion matrix</p>
+							<img src="img/species_swir_False_False_CM_norm.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:60%;">
+							</section>		
 					</section>
 				</section>    
 <!-- 				<section data-state="standard-map">
                     <div id="standard-map" class="map" style="right: 30%; width: 160%; height: 75vh; bottom: 10vh">></div> 
                 </section> -->
+                <section>
+                	<section>
+                		<h3>Additional problems</h3>
+                		<span>BRDF correction</span>
+                		<br>
+                		<img src="img/propabilities_Swirfull_BS_False_DTM_False.png" style="float:left; width:50%;">
+                		<img src="img/probabar.png" style="float:center; width:10%;">
+                		<br><br>
+                		<span style="font-size: 20px;">Picture showing maximum probability for pixel</span>
+            		</section>
+            		<section>
+            		<br>
+                		<img src="img/propabilities_Swirfull_BS_False_DTM_False_zoom1.png"   style="padding:0; margin:0; background:none; border:none; box-shadow:none; width:70%;">
+            		</section>
+            		<section>
+                		<img src="img/hist.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:60%;">
+            		</section>
 
+
+
+                </section>
 
                 <section>
+                	<h1>The End...</h1>
+                	<br>
                 	<h3>Sources:</h3>
                 	<div style="font-size:25px">
                 	<p><a href="https://doi.org/10.1023/a:1010933404324">Breiman, Leo (2001). "Random Forests" In: Machine Learning 45.1, pp. 5–32.</p>
                 	<p><a href="https://doi.org/10.1007/s10994-006-6226-1">Geurts, et al. (2006). “Extremely randomized trees”. In: Machine Learning 63.1, pp. 3–42.</p>
-                   	<p><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008). “Conditional Variable Importance for Random Forests”. In: BMC Bioinformatics 9.1 </a>          		
+                   	<p><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008). “Conditional Variable Importance for Random Forests”. In: BMC Bioinformatics 9.1 </a>         		
                 	</p>
                 	<p><a href=" https://arxiv.org/abs/1407.7502v3">Louppe, Gilles (2014). “Understanding Random Forests: From Theory to Practice”. PhD thesis. University of Liège, Belgium.</a></p>
                 	</div>
@@ -977,7 +1017,7 @@
 				slideNumber: true,
 				center: false,
 				enableSpeakerNotes: true,
-				viewDistance: 1,
+				viewDistance: 5,
 
 				// Enable the slide overview mode
 				overview: true,
@@ -1495,6 +1535,117 @@ Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	// if (event.currentSlide == 2,3) {
 		Highcharts.chart('inventory', {
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false,
+		                backgroundColor: '#222222',
+		                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+		                // color: "#f00",
+		                // fontFamily: 'serif',
+		                type: 'column'
+		            },
+
+		            exporting: {
+		                enabled: false
+		            },
+		            credits: {
+		                enabled: false
+		            },          
+		            title: {
+		                text: 'Inventory 2002/2003'
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+
+
+		            xAxis: {
+		                type: 'category'
+		            },
+		            yAxis: {
+		            	title: { text: 'Percentage' },
+
+
+		            },
+
+		            plotOptions: {
+		                    series: {
+		                    	showInLegend: false,
+		                        allowOverlap: true,
+		                        borderWidth: 0,
+		                        dataLabels: {
+		                            enabled: true,
+		                            style: {
+			                        color: 'white',
+			                        textShadow: '0px 1px 2px #33333'},
+		                            format: '{point.y:.1f}%'
+		                        }
+		                    }
+		                },
+
+
+		            series: [{
+		                name: 'Species',
+		                colorByPoint: true,
+		                data: [{
+
+
+		                    name: 'Abies alba',
+		                    y: 2.6,
+		                    color: '#1f78b4'
+		                 
+		                }, {
+		                    name: 'Acer pseudoplatanus',
+		                    y: 1.2,
+		                    color: '#17BECF'
+		                }, {
+		                    name: 'Alnus glutinosa',
+		                    y: 0,
+		                    color: '#ff7f0e'
+		                }, {
+		                    name: 'Betula pendula',
+		                    y: 0.7,
+		                    color: '#ffbb78'
+		                }, {
+		                    name: 'Fagus sylvatica',
+		                    y: 24.5,
+		                    color: '#2ca02c'
+		                }, {
+		                    name: 'Fraxinus excelsior',
+		                    y: 0.1,
+		                    color: '#98df8a'
+		                }, {
+		                    name: 'Larix decidua',
+		                    y: 0.1,
+		                    color: '#d62728'
+		                }, {
+		                    name: 'Picea abies',
+		                    y: 67.00,
+		                    color: '#ff9896'
+		                }, {
+		                    name: 'Pinus mugo',
+		                    y: 0.1,
+		                    color: '#9467bd'
+		                }, {
+		                    name: 'Populus tremula',
+		                    y: 0.1,
+		                    color: '#c5b0d5'
+		                }, {
+		                    name: 'Pseudotsuga menziesii',
+		                    y: 0.2,
+		                    color: '#8c564b'
+
+		                }]
+		            }]
+		        })
+	        })});			
+
+
+Reveal.addEventListener( 'slidechanged', function( event ) {
+$(document).ready(function () {
+	// if (event.currentSlide == 2,3) {
+		Highcharts.chart('inventory2', {
 		            chart: {
 		                plotBackgroundColor: null,
 		                plotBorderWidth: null,
