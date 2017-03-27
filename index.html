@@ -187,16 +187,39 @@
 	                </section>
                 </section>
                 <section>
-                	<h2>Software</h2>
-                			<img data-src="img/GDALLogoColor.png" class="fragment" style="width: 60px height: 60px;">
-                			<img data-src="img/Scipylogo.png" class="fragment" style="width: 80px height: 100px;">
-                			<img data-src="img/Scikit-learn_logo.png" class="fragment" style="width: 80px height: 100px;">
-       <!--          			<ul>
-							<li class="fragment"> <img data-src="img/GDALLogoColor.png" style="width: 80px height: 100px;"></li>
-							<li class="fragment"> <img data-src="img/Scipylogo.png" style="width: 100px height: 50px;"></li>
-							<li class="fragment"> <img data-src="img/Scikit-learn_logo.png" style="width: 100px height: 50px;"></li>
-							</ul> -->
-
+                	<section>	
+                	<h3>Software</h3>
+                	<p>All software used after preprocessing the hyperspectral data is open-source.</p>
+                	<p style="font-size:15px">(And mostly Python)</p>
+                			<img data-src="img/GDALLogoColor.png" class="fragment" style="width: 100px; height: 100px;">
+                			<img data-src="img/Scipylogo.png" class="fragment" style="width: 200px;">
+                			<img data-src="img/Scikit-learn_logo.png" class="fragment" style="width: 150px;">
+        			</section>
+        			<section>
+        			<h3>Geospatial Data Abstraction Library (GDAL)</h3>
+        				<a href="http://www.gdal.org/"><img data-src="img/GDALLogoColor.png" style="width: 100px; height: 110px;"></a>
+        				<br>
+        				<span>C /C++ Library for reading and writing raster and vector (OGR) geospatial data formats.</span>
+        				<span></span>
+        			</section>
+        			<section>
+        			<h3>SciPy</h3>
+        				<a href="https://www.scipy.org/"><img data-src="img/Scipylogo.png" style="width: 80px height: 100px;"></a>
+        				<br>
+        				<span>Is an open source Python library used for scientific computing and technical computing.</span>
+        				<br>
+        				<br>
+        				<span>Includes: Numpy,pandas,Matplotlib...</span>
+        			</section>
+        			<section>
+        			<h3>scikit-learn</h3>
+        				<a href="http://scikit-learn.org/stable/"><img data-src="img/Scikit-learn_logo.png" style="width: 80px height: 100px;"></a>
+        				<br>
+        				<span>Is an open source Python library that implements a range of machine learning algorithms.</span>
+        				<br>
+        				<br>
+        				<span>Including:  Support vector machines, random forests, gradient boosting, k-means , neural networks.</span>
+        			</section>
                 </section>	
 
                 <section>
@@ -315,6 +338,66 @@
 							<div id="spacor"></div>						
 							<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 						</div>
+					</section>
+					<section>
+						<h3>Vegetation indices</h3>
+						<table style="font-size:15px;max-height:70%;">
+							<thead>
+								<tr>
+									<th>Indices</th>
+									<th>Abbrevation</th>
+									<th style="text-align:center;">Formula</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Cellulose Absorption Index</td>
+									<td style="font-weight: bold;">CAI</td>
+									<td>$$0.5 \times ( \lambda_{2005 \mu m} +   \lambda_{2203 \mu m}) - \lambda_{2106 \mu m}$$</td>
+								</tr>
+								<tr>
+									<td>Chlorophyll Index Green</td>
+									<td style="font-weight: bold;">CIG</td>
+									<td>$$\frac{ \lambda_{860 \mu m}}{ \lambda_{545 \mu m}} -1 $$</td>
+								</tr>								
+								<tr>
+									<td>Enhanced Vegetation Index</td>
+									<td style="font-weight: bold;">EVI</td>
+									<td>$$2.5\times {\frac  {( \lambda_{800 \mu m}- \lambda_{660 \mu m})}{(\lambda_{800 \mu m}+6\times \lambda_{660 \mu m}-7.5\times \lambda_{480 \mu m}+1)}}$$</td>
+								</tr>								
+								<tr>
+									<td>Normalized Difference Lignin Index</td>
+									<td style="font-weight: bold;">NDLI</td>
+									<td>$$\frac{\left(log \frac{1}{\lambda_{1754 \mu m}}\right) - \left(log \frac{1}{\lambda_{1680 \mu m}}\right)}{\left(log \frac{1}{\lambda_{1754 \mu m}}\right) + \left(log \frac{1}{\lambda_{1680 \mu m}}\right)}$$</td>
+								</tr>								
+								<tr>
+									<td>Normalized Difference Leaf Mass (per area)</td>
+									<td style="font-weight: bold;">NDLma</td>
+									<td>$$\frac{  \lambda_{2260 \mu m} -   \lambda_{1490 \mu m} }{  \lambda_{2260 \mu m} +   \lambda_{1490 \mu m} }$$</td>
+								</tr>								
+								<tr>
+									<td>Normalized Difference Vegetation Index</td>
+									<td style="font-weight: bold;">NDVI</td>
+									<td>$$\frac{  \lambda_{858 \mu m} -   \lambda_{649 \mu m} }{  \lambda_{858 \mu m} +   \lambda_{649 \mu m} }$$</td>
+								</tr>								
+								<tr>
+									<td>Red Edge NDVI</td>
+									<td style="font-weight: bold;">RENDVI</td>
+									<td>$$\frac{  \lambda_{750 \mu m} -   \lambda_{705 \mu m} }{  \lambda_{750 \mu m}  +  \lambda_{705 \mu m} }$$</td>
+								</tr>								
+								<tr>
+									<td>Red Edge Inflection Point</td>
+									<td style="font-weight: bold;">REIP</td>
+									<td>$$700+40 {\left(\frac{\frac{(\lambda_{670 \mu m}+\lambda_{780 \mu m})}{2} -\lambda_{700\mu m}}{\lambda_{740 \mu m}-\lambda_{700 \mu m}}\right)}$$</td>
+								</tr>								
+								<tr>
+									<td>Modified NDVI</td>
+									<td style="font-weight: bold;">mNDVI</td>
+									<td>$$\frac{  \lambda_{800 \mu m} -   \lambda_{680 \mu m} }{  \lambda_{800 \mu m} +   \lambda_{680 \mu m} - \lambda_{2445 \mu m}}$$</td>
+								</tr>								
+							</tbody>			
+							
+						</table>
 					</section>		
 					<section>
 						<h3>Training data</h3>
