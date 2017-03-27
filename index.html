@@ -1051,10 +1051,15 @@
                     o.start();
                     setTimeout(function() {
                         Reveal.addEventListener('slidechanged', removeListener);
-                    }, 0);
+                    }, 1);
                 });
             }
 
+
+
+            runOnState('hyspex-map', window.hyspexMap);
+            runOnState('standard-map', window.standardMap);
+            runOnState('standard2-map', window.standardMap2);
 
             runOnState('hyspex-map', window.hyspexMap);
             runOnState('standard-map', window.standardMap);
