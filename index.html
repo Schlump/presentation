@@ -149,7 +149,7 @@
 						<li class="fragment">Software</li>
 						<li class="fragment">Data</li>
 						<li class="fragment">Forests of randomized trees</li>
-						<li class="fragment">Hyperspectral data problems</li>
+						<!-- <li class="fragment">Hyperspectral data problems</li> -->
 						<li class="fragment">Results</li>
 					</ul>
 				</section>
@@ -522,21 +522,20 @@
 
 	            <section>
 	            	<section>
-	            	<h3>Random Forests</h3>
-	            	<span class="fragment">
+	            	<h3>Forests of randomized trees</h3>
+	            		<span class="fragment">
 	            		Random forests form a family of methods that consist of building an
 						ensemble ("forest") of decision trees.</span> 
-						<span class="fragment">At each node, the tree splits the data into two nodes</span>
-						<span class="fragment">Splits are chosen using a splitting criterion (Gini criterion ).</span>
+						<br>
+						<ul style="font-size: 30px;">
+						<li class="fragment">Each tree in the ensemble is built from a sample drawn with replacement (bagging) from the training set</li>
+						<li class="fragment">At each node, the tree splits the data into two nodes</li>
+						<li class="fragment">For splitting, a random subset of attributes/features (random subwindow) is drawn.</li>
+						<li class="fragment">Splits are chosen from the subset of features using a splitting criterion (Gini criterion).</li>
+						<li class="fragment">Trees a grown in full, not pruned</li>
+						<li class="fragment">The scikit-learn implementation combines classifiers by averaging their probabilistic prediction, instead of letting each classifier vote for a single class.</li>
+						</ul>	
 
-
-
-						<span class="fragment">At each node, a random subset of attributes/features (random subwindow) is drawn.</span>
-						<span class="fragment"></span>
-						<span class="fragment"></span>
-						<span class="fragment"></span>
-						<span class="fragment"></span>
-						
 	            	</section>
 	            	<section>
 	            		<h3>Why use forests of randomized trees</h3>
@@ -547,8 +546,17 @@
 							<li class="fragment">Included feature importance measurement</li>
 							<li class="fragment">Out-of-bag error rate</li>
 						</ul>
-
-	            	</section>
+					</section>
+					<section>
+					<div>	
+					<img src="img/trees3.png"  style="width: 90%;">	
+					</div>
+					</section>
+					<section>
+					<div>
+					<img src="img/gridSearchAll.png" style="width: 90%;">	
+					</div>
+					</section>
 	            	<section>
 	            		<h3>Feature importance</h3>
 	            		<p>Two ways of computing feature importance for randomized forets:</p>
@@ -570,12 +578,20 @@
 						well, and that it overestimates the importance of correlated variables </p>
 					</section>
 					<section>
-						<h3>
-							scikit-learn offers two basic types of random forests:
-						</h3>
+						<h4>
+							scikit-learn offers two basic types of forests of randomized trees:
+						</h4>
 						<br>
-						<p>Random Forest  <a style="font-size:20px;" href="https://doi.org/10.1023/a:1010933404324"> [Breiman, (2001)]</a></p>
+						<p>Random Forest&reg;<a style="font-size:20px;" href="https://doi.org/10.1023/a:1010933404324"> [Breiman (2001)]</a></p>
 						<p>Extremely Randomized Trees  <a style="font-size:20px;" href="https://doi.org/10.1007/s10994-006-6226-1"> [Geurts, et al. (2006)]</a></p>
+						<p class="fragment" style="font-size: 25px;">Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz<br> 
+						Fitting:<br>
+						RF:   3min 37s10min<br>
+						ET:  0min 22.7s1min
+						<br><br>
+						5 Fold cross validation:<br>
+						RF: 10min 30s <br>
+						ET:1min 28s</p>
 					</section>
 	            </section>
 
