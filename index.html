@@ -1017,7 +1017,7 @@
 				slideNumber: true,
 				center: false,
 				enableSpeakerNotes: true,
-				viewDistance: 5,
+				viewDistance: 1,
 
 				// Enable the slide overview mode
 				overview: true,
@@ -1051,15 +1051,10 @@
                     o.start();
                     setTimeout(function() {
                         Reveal.addEventListener('slidechanged', removeListener);
-                    }, 1);
+                    }, 0);
                 });
             }
 
-
-
-            runOnState('hyspex-map', window.hyspexMap);
-            runOnState('standard-map', window.standardMap);
-            runOnState('standard2-map', window.standardMap2);
 
             runOnState('hyspex-map', window.hyspexMap);
             runOnState('standard-map', window.standardMap);
@@ -1307,7 +1302,6 @@ $(document).ready(function () {
 	            }]
 	        })
         });
-
         $(document).ready(function () {
 	Highcharts.chart('swirdata', {
 	            chart: {
@@ -1422,7 +1416,6 @@ $(document).ready(function () {
 	            }]
 	        })
         });		
-
 $(document).ready(function () {
 	Highcharts.chart('alldata', {
 	            chart: {
@@ -1759,7 +1752,7 @@ $(document).ready(function () {
 		        })
 	        })	
 
-// Reveal.addEventListener( 'slidechanged', function( event ) {
+Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	Highcharts.chart('invNorth', {
 	    chart: {
@@ -1837,9 +1830,8 @@ $(document).ready(function () {
 	        }]
 	    }]
 	        })
-        })
-
-// Reveal.addEventListener( 'slidechanged', function( event ) {
+        })});			
+Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	Highcharts.chart('invSouth', {
 	    chart: {
@@ -1929,7 +1921,7 @@ $(document).ready(function () {
 	        }]
 	    }]
         })
-    })		
+    })});			
 
 
 		</script>
