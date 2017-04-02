@@ -1056,7 +1056,7 @@
 			function runOnState(state, o) {
                 Reveal.addEventListener(state, function(e) {
                     var removeListener = function() {
-                        o.stop();
+                        o.start();
                         Reveal.removeEventListener('slidechanged', removeListener);
                     }
                     o.start();
@@ -1067,8 +1067,8 @@
             }
 
 
-            runOnState('hyspex-map', window.hyspexMap);
             runOnState('standard-map', window.standardMap);
+            runOnState('hyspex-map', window.hyspexMap);
             runOnState('standard2-map', window.standardMap2);
 
             
