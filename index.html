@@ -181,23 +181,25 @@
 					</section>					
 					<section data-state="standard2-map">
 						<span>Bavarian Forest National Park</span>
-
-						<div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
+						<img src="img/park1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	
+						<!-- <div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div>  -->
 					</section>
 	                <section data-state="hyspex-map">
 	                	<span>Hyperspectral data acquired in 2013</span>
 	                	<br>
 	                	<img src="img/park2.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	
+	                	<!-- <div id="hyspex-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div>  -->
 
 	                </section>
 
 	                <section>
 	                	<div style="height: 100%; width:100%;">
-	                	<div id="inventory" style="margin-left: auto; margin-right: auto; max-width: 80vh;max-height: 60vh;"></div>
+	                	<img src="img/chart1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">
+	           <!--      	<div id="inventory" style="margin-left: auto; margin-right: auto; max-width: 80vh;max-height: 60vh;"></div>
 	                	<div id="wrapper2" style="margin-left: auto; margin-right: auto; width: 90vh" > 
 	                  		<div id="invNorth" class="first"  style="height: 20vh"></div>
 	                		<div id="invSouth" class="second"  style="height: 20vh"></div>
-	                	</div>
+	                	</div> -->
 	                	</div>
 	                </section>
 	               	<section>
@@ -847,7 +849,8 @@
 						<section>
 						<h3>Results</h3>
 						<h4>Validation based on spatial distribution and overall percentages:</h4>
-						<div id="inventory2" style="width: 75vh;margin-left: auto; margin-right: auto;"></div>	
+						<img src="img/chart2.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">
+						<!-- <div id="inventory2" style="width: 75vh;margin-left: auto; margin-right: auto;"></div>	 -->
 						</section>	
 						<!-- <section data-background="img/Swirfull_BS_False_DTM_True.png" data-background-size="60%", data-state="img-right"> -->
 						<section>
@@ -1549,7 +1552,7 @@ $(document).ready(function () {
 
 
 
-// Reveal.addEventListener( 'slidechanged', function( event ) {
+Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	// if (event.currentSlide == 2,3) {
 		Highcharts.chart('inventory', {
@@ -1657,11 +1660,11 @@ $(document).ready(function () {
 		                }]
 		            }]
 		        })
-	})
-	        // })});		
+	// })
+	        })});		
 
 
-// Reveal.addEventListener( 'slidechanged', function( event ) {
+Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	// if (event.currentSlide == 2,3) {
 		Highcharts.chart('inventory2', {
@@ -1769,10 +1772,10 @@ $(document).ready(function () {
 		                }]
 		            }]
 		        })
-	      })
-	       // })});	
+	      // })
+	       })});
 
-// Reveal.addEventListener( 'slidechanged', function( event ) {
+Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	Highcharts.chart('invNorth', {
 	    chart: {
@@ -1850,12 +1853,12 @@ $(document).ready(function () {
 	        }]
 	    }]
 	        })
-        // })});			
+        })});			
 
-})
+// })
 
 
-// Reveal.addEventListener( 'slidechanged', function( event ) {
+Reveal.addEventListener( 'slidechanged', function( event ) {
 $(document).ready(function () {
 	Highcharts.chart('invSouth', {
 	    chart: {
@@ -1945,8 +1948,8 @@ $(document).ready(function () {
 	        }]
 	    }]
         })
-    // })});			
-})
+    })});			
+// })
 
 		</script>
 	</body>
