@@ -115,6 +115,7 @@ window.standardMap = (function() {
         }
     };
 })();
+
 window.standardMap2 = (function() {
     var map;
 
