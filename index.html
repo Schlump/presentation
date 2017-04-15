@@ -2013,7 +2013,7 @@ Highcharts.chart('f1scoreschart', {
 	            	itemStyle: {
 	            		color: '#FFFFFF',
 	            		ontWeight: 'bold',
-			          width:80
+			          // width:80
 			        },
 
 	            },
@@ -2023,7 +2023,34 @@ Highcharts.chart('f1scoreschart', {
     plotOptions: {
         column: {
             pointPadding: 0.2,
-            borderWidth: 0
+            groupPadding: 0.1,
+            borderWidth: 0,
+
+            events: {
+                    legendItemClick: function() {
+                        var chart = this.chart,
+                            lastIndex = this.index,
+                            series = chart.series,
+                            sLen = series.length;
+                        
+                        for(var i = 0; i < sLen; i++) {
+                            var s = series[i];    
+                            if(s.index > lastIndex) {
+                                s.update({
+                                    legendIndex: s.index - 1    
+                                }, false);
+                            } else if( s.index == lastIndex) {
+                                s.update({
+                                    legendIndex: sLen    
+                                }, false);
+                            }
+                        }
+                        chart.redraw();
+                        console.log(this);
+                    }
+                }
+
+
         },
          allowPointSelect: true,
         style: {
@@ -2034,14 +2061,14 @@ Highcharts.chart('f1scoreschart', {
     },
 
     series: [{
-        name: 'All (DTM True)',
-        data: [0.67 	,0.74 	,0.82 	,0.75 	,0.90 	,0.82 	,0.81 	,0.77 	,0.95 	,0.67 	,0.55],
-        color :'#f15c80'
-
-    }, {
         name: 'All (DTM False)',
         data: [0.55 	,0.56 	,0.58 	,0.60 	,0.86 	,0.69 	,0.67 	,0.73 	,0.86 	,0.31 	,0.07],
         color: '#90ed7d'
+
+    }, {
+        name: 'All (DTM True)',
+        data: [0.67 	,0.74 	,0.82 	,0.75 	,0.90 	,0.82 	,0.81 	,0.77 	,0.95 	,0.67 	,0.55],
+        color :'#f15c80'
 
 
     }, {
@@ -2060,9 +2087,9 @@ Highcharts.chart('f1scoreschart', {
         color: '#7cb5ec'
 
     },{
-        name: 'Swirfull (DTM True)',
-        data: [0.77 	,0.74 	,0.85 	,0.81 	,0.88 	,0.88 	,0.85 	,0.83 	,0.96 	,0.74 	,0.45],
-        color: '#e4d354'
+        name: 'VNIR',
+        data: [0.37 	,0.27 	,0.44 	,0.29 	,0.76 	,0.48 	,0.53 	,0.52 	,0.86 	,0.28 	,0.07],
+        color: '#f45b5b'
 
     },{
         name: 'Swirfull (DTM False)',
@@ -2071,9 +2098,9 @@ Highcharts.chart('f1scoreschart', {
 
 
     },{
-        name: 'VNIR',
-        data: [0.37 	,0.27 	,0.44 	,0.29 	,0.76 	,0.48 	,0.53 	,0.52 	,0.86 	,0.28 	,0.07],
-        color: '#f45b5b'
+        name: 'Swirfull (DTM True)',
+        data: [0.77 	,0.74 	,0.85 	,0.81 	,0.88 	,0.88 	,0.85 	,0.83 	,0.96 	,0.74 	,0.45],
+        color: '#e4d354'
 
     },{
         name: 'Vnirfull (DTM True)',
