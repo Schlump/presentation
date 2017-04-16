@@ -99,9 +99,7 @@
 				margin-top: -30px;
 			}
 
-			.highcharts-title {
-				fill:#fff!important;
-			}
+
 			.vertical{
 			    writing-mode:tb-rl;
 			    -webkit-transform:rotate(180deg);
@@ -115,6 +113,7 @@
 			    width:20px;
 			    height:20px;
 			}
+
 			html.img-right div.slide-background.present {
 			    background-position: 80%;
 			}
@@ -181,20 +180,20 @@
 					</section>					
 					<section data-state="standard2-map">
 						<span>Bavarian Forest National Park</span>
-						<!-- <img src="img/park1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	 -->
+						<!-- <img src="img/park1.png" style="padding:5px; margin:5px;  width: 70%;">	 -->
 						<div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
 					</section>
 	                <section data-state="hyspex-map">
 	                	<span>Hyperspectral data acquired in 2013</span>
 	                	<br>
-	                	<!-- <img src="img/park2.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	 -->
+	                	<!-- <img src="img/park2.png" style="padding:5px; margin:5px;  width: 70%;">	 -->
 	                	<div id="hyspex-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
 
 	                </section>
 
 	                <section>
 	                	<div style="height: 100%; width:100%;">
-	                	<!-- <img src="img/chart1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 95%;"> -->
+	                	<!-- <img src="img/chart1.png" style="padding:5px; margin:5px;  width: 95%;"> -->
 	                	<div id="inventory" style="margin-left: auto; margin-right: auto; max-width: 80vh;max-height: 60vh;"></div>
 	                	<div id="wrapper2" style="margin-left: auto; margin-right: auto; width: 90vh" > 
 	                  		<div id="invNorth" class="first"  style="height: 20vh"></div>
@@ -334,10 +333,10 @@
 					</tbody>
 					</table>
 					<div class="fragment" data-fragment-index="2">
-					<img src="img/spectrumplot.png"  class="plain" style="background:none; border:none; box-shadow:none; width: 50%;float: left;">
+					<img src="img/spectrumplot.png"  style="background-color: grey;width: 45%;float: left;">
 					</div>
 					<div class="fragment" data-fragment-index="4">	
-					<img src="img/treecount.png"  class="plain" style="background:none; border:none; box-shadow:none; width: 50%;float: right;">
+					<img src="img/treecount.png"   style="width: 45%;float: right;">
 					</div>	
 					</section>
 					<section>
@@ -354,8 +353,8 @@
 					<section>
 						<h3>Spectral training data</h3>
 						<div>
-							<img src="img/spectrumplotpreprocessed.png"  class="plain" style="float:left;padding:0;
-    margin:0; background:none; border:none; box-shadow:none; width:70%;">
+							<img src="img/spectrumplotpreprocessed.png"   style="background-color: grey ;float:left;padding:0;
+    margin:0;  width:65%;">
 						</div>
 						<div style="float: right; width: 30%;position: relative; right:15%;"> 
 							<div id="aa" class="box"></div><span class="speciestext">Abies alba</span>
@@ -564,13 +563,13 @@
 					<section>
 					<p>Number of trees in forest</p>
 					<div>	
-					<img src="img/numbertrees.svg"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width:80%;">	
+					<img src="img/numbertrees.svg"   style="background-color: grey; padding:5px; margin:5px;  width:80%;">	
 					</div>
 					</section>
 					<section>
 					<p>Size of the random subwindow</p>
 					<div>
-					<img src="img/numberoffeatures.svg" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	
+					<img src="img/numberoffeatures.svg" style="background-color: grey; padding:5px; margin:5px;  width: 70%;">	
 					</div>
 					</section>
 	            	<section>
@@ -669,7 +668,7 @@
 							<table sid="f1scores" style="font-size: 20px;">
 							<thead><tr><th title="Field #1">Data</th>
 							<th title="Field #2">DTM</th>
-							<th style="border-right: 1px solid white;" title="Field #3">Kappa</th>
+							<th style="border-right: 1px solid grey;" title="Field #3">Kappa</th>
 							<th title="Field #4">AA</th>
 							<th title="Field #5">AP</th>
 							<th title="Field #6">AG</th>
@@ -685,7 +684,7 @@
 							<tbody"><tr>
 							<td>all</td>
 							<td>True</td>
-							<td style="border-right: 1px solid white;" align="right">0.77</td>
+							<td style="border-right: 1px solid grey;" align="right">0.77</td>
 							<td style="border-bottom: 0px!important;" align="right">0.67</td>
 							<td style="border-bottom: 0px!important;" align="right">0.74</td>
 							<td style="border-bottom: 0px!important;" align="right">0.82</td>
@@ -701,7 +700,7 @@
 							<tr>
 							<td>all</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.64</td>
+							<td style="border-right: 1px solid grey;" align="right">0.64</td>
 							<td style="border-bottom: 0px;" align="right">0.55</td>
 							<td style="border-bottom: 0px;" align="right">0.56</td>
 							<td style="border-bottom: 0px;" align="right">0.58</td>
@@ -717,7 +716,7 @@
 							<tr>
 							<td>specind</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.58</td>
+							<td style="border-right: 1px solid grey;" align="right">0.58</td>
 							<td style="border-bottom: 0px;" align="right">0.56</td>
 							<td style="border-bottom: 0px;" align="right">0.29</td>
 							<td style="border-bottom: 0px;" align="right">0.48</td>
@@ -733,7 +732,7 @@
 							<tr>
 							<td>spectral</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.55</td>
+							<td style="border-right: 1px solid grey;" align="right">0.55</td>
 							<td style="border-bottom: 0px;" align="right">0.46</td>
 							<td style="border-bottom: 0px;" align="right">0.24</td>
 							<td style="border-bottom: 0px;" align="right">0.47</td>
@@ -749,7 +748,7 @@
 							<tr>
 							<td>swir</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.53</td>
+							<td style="border-right: 1px solid grey;" align="right">0.53</td>
 							<td style="border-bottom: 0px;" align="right">0.52</td>
 							<td style="border-bottom: 0px;" align="right">0.32</td>
 							<td style="border-bottom: 0px;" align="right">0.36</td>
@@ -765,7 +764,7 @@
 							<tr>
 							<td>swirfull</td>
 							<td>True</td>
-							<td style="border-right: 1px solid white;" align="right">0.80</td>
+							<td style="border-right: 1px solid grey;" align="right">0.80</td>
 							<td style="border-bottom: 0px;" align="right">0.77</td>
 							<td style="border-bottom: 0px;" align="right">0.74</td>
 							<td style="border-bottom: 0px;" align="right">0.85</td>
@@ -781,7 +780,7 @@
 							<tr>
 							<td>swirfull</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.63</td>
+							<td style="border-right: 1px solid grey;" align="right">0.63</td>
 							<td style="border-bottom: 0px;"align="right">0.49</td>
 							<td style="border-bottom: 0px;"align="right">0.54</td>
 							<td style="border-bottom: 0px;"align="right">0.67</td>
@@ -797,7 +796,7 @@
 							<tr>
 							<td>vnir</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.46</td>
+							<td style="border-right: 1px solid grey;" align="right">0.46</td>
 							<td style="border-bottom: 0px;" align="right">0.37</td>
 							<td style="border-bottom: 0px;" align="right">0.27</td>
 							<td style="border-bottom: 0px;" align="right">0.44</td>
@@ -813,7 +812,7 @@
 							<tr>
 							<td>vnirfull</td>
 							<td>True</td>
-							<td style="border-right: 1px solid white;" align="right">0.77</td>
+							<td style="border-right: 1px solid grey;" align="right">0.77</td>
 							<td style="border-bottom: 0px;" align="right">0.71</td>
 							<td style="border-bottom: 0px;" align="right">0.82</td>
 							<td style="border-bottom: 0px;" align="right">0.82</td>
@@ -829,7 +828,7 @@
 							<tr>
 							<td>vnirfull</td>
 							<td>False</td>
-							<td style="border-right: 1px solid white;" align="right">0.62</td>
+							<td style="border-right: 1px solid grey;" align="right">0.62</td>
 							<td style="border-bottom: 0px;" align="right">0.47</td>
 							<td style="border-bottom: 0px;" align="right">0.55</td>
 							<td style="border-bottom: 0px;" align="right">0.56</td>
@@ -881,13 +880,13 @@
 									<div id="spacor"></div>						
 									<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 								</div>
-								<img src="img/Swirfull_BS_False_DTM_True.png"  class="second" style="position: relative; bottom: 40px; left:5px; background:none; border:none; box-shadow:none;width: 65%;">
+								<img src="img/Swirfull_BS_False_DTM_True.png"  class="second" style="position: relative; bottom: 40px; left:5px; width: 65%;">
 							</div>
-							<div id="swirfull" style="position: absolute; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+							<div id="swirfull" style="position: absolute; width: 40vh; height: 25vh; margin-top: 35%; margin-left:-12%;"></div>
 						</section>
 						<section>
 							<p>SWIR + Spectral indices + LiDAR (swirfull)</p>
-							<img src="img/swirfull_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:65%;">
+							<img src="img/swirfull_top15.png"   style="background-color:grey; padding:5px; margin:5px; width:65%;">
 						</section>		
 
 						<section>
@@ -916,13 +915,13 @@
 									<div id="spacor"></div>						
 									<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 								</div>
-						<img src="img/All_BS_False_DTM_True.png"  class="second" style=" position: relative; bottom: 85px;left:90px; background:none; border:none; box-shadow:none;width: 85%;">
+						<img src="img/All_BS_False_DTM_True.png"  class="second" style="position: relative; bottom: 40px; left:5px; width: 65%;">
 							</div>
-							<div id="alldata" style="position: absolute; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+							<div id="alldata" style="position: absolute; width: 40vh; height: 25vh; margin-top: 35%; margin-left:-12%;"></div>
 							</section>
 							<section>
 							<p>VNIR + SWIR + Spectral indices + LiDAR (all)</p>
-							<img src="img/all_top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:65%;">
+							<img src="img/all_top15.png"   style="background-color:grey; padding:5px; margin:5px; width:65%;">
 							</section>		
 
 						<section>
@@ -951,19 +950,19 @@
 									<div id="spacor"></div>						
 									<div id="pm" class="box"></div><span class="speciestext">Pseudotsuga menziesii</span>
 								</div>
-								<img src="img/SpecInd_BS_False.png"  class="second" style="position: relative; bottom: 30px; background:none; border:none; box-shadow:none;width: 75%;">
+								<img src="img/SpecInd_BS_False.png"  class="second" style="position: relative; bottom: 40px; left:5px; width: 65%;">
 							</div>
-							<div id="specind" style="position: absolute; width: 40vh; height: 25vh; margin-top: 35%; max-width: 45%;"></div>
+							<div id="specind" style="position: absolute; width: 40vh; height: 25vh; margin-top: 35%; margin-left:-12%;"></div>
 							</section>
 
 							<section>
 							<p>Spectral + vegetation indices</p>
-							<img src="img/specind_Top15.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:65%;">
+							<img src="img/specind_Top15.png"   style="background-color:grey; padding:5px; margin:5px; width:65%;">
 							</section>	
 
 							<section>
 							<p>Normalized confusion matrix</p>
-							<img src="img/specind_normCM.png"  class="plain" style="padding:0; margin:0; background:none; border:none; box-shadow:none;width:60%;">
+							<img src="img/specind_normCM.png"   style="background-color:grey; padding:5px; margin:5px; width:60%;">
 							</section>		
 
 					</section>
@@ -974,15 +973,15 @@
                 		<h3>Additional problems</h3>
                 		<span>BRDF correction</span>
                 		<br>
-                		<img src="img/propabilities_SpecInd_BS_False_DTM_False.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; float:left; width:60%;">
-                		<img src="img/probabar1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none;float:center; width:10%;">
+                		<img src="img/propabilities_SpecInd_BS_False_DTM_False.png" style="background-color:grey; padding:5px; margin:5px;  float:left; width:60%;">
+                		<img src="img/probabar1.png" style="background-color:grey; padding:5px; margin:5px;float:center; width:10%;">
                 		<br><br>
                 		<span style="font-size: 20px;">Picture showing maximum probability for pixel</span>
             		</section>
             		<section>
             		<span style="font-size: 30px;">Influence of BRDF correction on probalities of prediction</span>
             		<br>
-                		<img src="img/SpecInd_proba_zoom_w.png"   style="padding:0; margin:0; background:none; border:none; box-shadow:none; width:70%;">
+                		<img src="img/SpecInd_proba_zoom_w.png"   style="background-color:grey; padding:5px; margin:5px;  width:70%;">
             		</section>
 
 
@@ -1091,7 +1090,7 @@
 				                plotBackgroundColor: null,
 				                plotBorderWidth: null,
 				                plotShadow: false,
-				                backgroundColor: '#222222',
+				                // backgroundColor: '#222222',
 				                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
 				                // color: "#f00",
 				                // fontFamily: 'serif',
@@ -1135,9 +1134,9 @@
 				                        dataLabels: {
 				                            enabled: true,
 					 						style: {
-						                        color: 'white',
+						                        // color: 'white',
 						                        fontSize: '8px',
-						                        textShadow: '0px 1px 2px #33333'
+						                        // textShadow: '0px 1px 2px #33333'
 						                    	},
 				                            format: '{point.y:.2f}%'
 				                        }
@@ -1207,7 +1206,7 @@ $(document).ready(function () {
 	                plotBackgroundColor: null,
 	                plotBorderWidth: null,
 	                plotShadow: false,
-	                backgroundColor: '#222222',
+	                // backgroundColor: '#222222',
 	                type: 'column'
 	            },
 
@@ -1253,9 +1252,9 @@ $(document).ready(function () {
 	                        dataLabels: {
 	                            enabled: true,
 		 						style: {
-			                        color: 'white',
+			                        // color: 'white',
 			                        fontSize: '8px',
-			                        textShadow: '0px 1px 2px #33333'
+			                        // textShadow: '0px 1px 2px #33333'
 			                    	},
 	                            format: '{point.y:.2f}%'
 	                        }
@@ -1324,7 +1323,7 @@ $(document).ready(function () {
 	                plotBackgroundColor: null,
 	                plotBorderWidth: null,
 	                plotShadow: false,
-	                backgroundColor: '#222222',
+	                // backgroundColor: '#222222',
 	                type: 'column'
 	            },
 
@@ -1343,7 +1342,7 @@ $(document).ready(function () {
 
 
 	            labels: {
-	            	color: '#fff'
+	            	// color: '#fff'
 
 	            },
 
@@ -1369,9 +1368,9 @@ $(document).ready(function () {
 	                        dataLabels: {
 	                            enabled: true,
 		 						style: {
-			                        color: 'white',
+			                        // color: 'white',
 			                        fontSize: '8px',
-			                        textShadow: '0px 1px 2px #33333'
+			                        // textShadow: '0px 1px 2px #33333'
 			                    	},
 	                            format: '{point.y:.2f}%'
 	                        }
@@ -1441,7 +1440,7 @@ $(document).ready(function () {
 	                plotBackgroundColor: null,
 	                plotBorderWidth: null,
 	                plotShadow: false,
-	                backgroundColor: '#222222',
+	                // backgroundColor: '#222222',
 	                type: 'column'
 	            },
 
@@ -1460,7 +1459,7 @@ $(document).ready(function () {
 
 
 	            labels: {
-	            	color: '#fff'
+	            	// color: '#fff'
 
 	            },
 
@@ -1560,7 +1559,7 @@ $(document).ready(function () {
 		                plotBackgroundColor: null,
 		                plotBorderWidth: null,
 		                plotShadow: false,
-		                backgroundColor: '#222222',
+		                // backgroundColor: '#222222',
 		                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
 		                // color: "#f00",
 		                // fontFamily: 'serif',
@@ -1598,8 +1597,9 @@ $(document).ready(function () {
 		                        dataLabels: {
 		                            enabled: true,
 		                            style: {
-			                        color: 'white',
-			                        textShadow: '0px 1px 2px #33333'},
+			                        // color: 'white',
+			                        // textShadow: '0px 1px 2px #33333'},
+			                    },
 		                            format: '{point.y:.1f}%'
 		                        }
 		                    }
@@ -1672,7 +1672,7 @@ $(document).ready(function () {
 		                plotBackgroundColor: null,
 		                plotBorderWidth: null,
 		                plotShadow: false,
-		                backgroundColor: '#222222',
+		                // backgroundColor: '#222222',
 		                // font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
 		                // color: "#f00",
 		                // fontFamily: 'serif',
@@ -1710,8 +1710,9 @@ $(document).ready(function () {
 		                        dataLabels: {
 		                            enabled: true,
 		                            style: {
-			                        color: 'white',
-			                        textShadow: '0px 1px 2px #33333'},
+			                        // color: 'white',
+			                        // textShadow: '0px 1px 2px #33333'},
+			                    	},
 		                            format: '{point.y:.1f}%'
 		                        }
 		                    }
@@ -1782,7 +1783,7 @@ $(document).ready(function () {
 	        plotBackgroundColor: null,
 	        plotBorderWidth: null,
 	        plotShadow: false,
-	        backgroundColor: '#222222',
+	        // backgroundColor: '#222222',
 	        type: 'pie'
 	    },
 	    title: {
@@ -1806,10 +1807,10 @@ $(document).ready(function () {
 	                enabled: true,
 	                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
 	                style: {
-		                    color: 'white',
+		                    // color: 'white',
 		                    fontSize: '10px',
 		                    fontWeight: 'bold',
-		                    textShadow: '0px 1px 2px #33333'
+		                    // textShadow: '0px 1px 2px #33333'
 		                    },
 	            }
 	        }
@@ -1865,7 +1866,7 @@ $(document).ready(function () {
 	        plotBackgroundColor: null,
 	        plotBorderWidth: null,
 	        plotShadow: false,
-	        backgroundColor: '#222222',
+	        // backgroundColor: '#222222',
 	        type: 'pie'
 	    },
 	    title: {
@@ -1891,9 +1892,9 @@ $(document).ready(function () {
 	                enabled: true,
 	                format: '<b>{point.name}</b>: {point.percentage:.2f} %',
 	                style: {
-		                    color: 'white',
+		                    // color: 'white',
 		                    fontSize: '10px',
-		                    textShadow: false
+		                    // textShadow: false
 		                    },
 	            }
 	        }
@@ -1958,11 +1959,11 @@ Highcharts.chart('f1scoreschart', {
        	plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        backgroundColor: '#222222',
+        // backgroundColor: '#222222',
     },
     title: {
         text: 'F1-Scores',
-        style: {"color": "white"}
+        // style: {"color": "white"}
     },
     
 
@@ -1995,7 +1996,7 @@ Highcharts.chart('f1scoreschart', {
             '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
-        backgroundColor: '#696969',
+        // backgroundColor: '#696969',
 
         useHTML: true
     },
@@ -2006,17 +2007,17 @@ Highcharts.chart('f1scoreschart', {
     credits: {
             enabled: false
         },   
-    legend: {
-    	itemHiddenStyle: { "color": "#222222" },
-    	itemHoverStyle:{ "color": "#cccccc" },
+    // legend: {
+    // 	itemHiddenStyle: { "color": "#222222" },
+    // 	itemHoverStyle:{ "color": "#cccccc" },
 
-	            	itemStyle: {
-	            		color: '#FFFFFF',
-	            		ontWeight: 'bold',
-			          // width:80
-			        },
+	   //          	itemStyle: {
+	   //          		color: '#FFFFFF',
+	   //          		ontWeight: 'bold',
+			 //          // width:80
+			 //        },
 
-	            },
+	   //          },
 
 
 
@@ -2054,9 +2055,9 @@ Highcharts.chart('f1scoreschart', {
         },
          allowPointSelect: true,
         style: {
-		                    color: 'white',
+		                    // color: 'white',
 		                    fontSize: '10px',
-		                    textShadow: false
+		                    // textShadow: false
 		                    },
     },
 
