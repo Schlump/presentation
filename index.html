@@ -149,16 +149,16 @@
 				<section>
 					<h3>Talking points:</h3>
 					<ul>
-						<li class="fragment">Bavarian Forest National Park</li>
-						<li class="fragment">Software</li>
+						<li class="fragment strike">Bavarian Forest National Park</li>
+						<li class="fragment strike">Software</li>
+						<li class="fragment strike">Forests of randomized trees</li>
 						<li class="fragment">Data</li>
-						<li class="fragment">Forests of randomized trees</li>
 						<li class="fragment">Results</li>
 					</ul>
 				</section>
 
-				<section>
-					<section data-state="standard-map">
+				<!-- <section> -->
+<!-- 					<section data-state="standard-map">
 						<h3>Bavarian Forest National Park</h3>
 						<div style="float:left; width:45%">	
 						<ul>
@@ -181,35 +181,11 @@
 					</section>					
 					<section data-state="standard2-map">
 						<span>Bavarian Forest National Park</span>
-						<!-- <img src="img/park1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	 -->
-						<div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
-					</section>
-	                <section data-state="hyspex-map">
-	                	<span>Hyperspectral data acquired in 2013</span>
-	                	<br>
-	                	<!-- <img src="img/park2.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	 -->
-	                	<div id="hyspex-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
-
-	                </section>
-
-	                <section>
-	                	<div style="height: 100%; width:100%;">
-	                	<!-- <img src="img/chart1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 95%;"> -->
-	                	<div id="inventory" style="margin-left: auto; margin-right: auto; max-width: 80vh;max-height: 60vh;"></div>
-	                	<div id="wrapper2" style="margin-left: auto; margin-right: auto; width: 90vh" > 
-	                  		<div id="invNorth" class="first"  style="height: 20vh"></div>
-	                		<div id="invSouth" class="second"  style="height: 20vh"></div>
-	                	</div>
-	                	</div>
-	                </section>
-	               	<section>
-	                	<img data-src="img/img1.jpg" style="margin: auto; width: 90vh">
-	                </section>
-	                <section>
-	                	<img data-src="img/img2.jpg" style="margin: auto; width: 90vh">
-	                </section>
-                </section>
-                <section>
+					<img src="img/park1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	 -->
+<!-- 						<div id="standard2-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
+					</section> --> 
+	               
+               <!--  <section>
                 	<section>	
                 	<h3>Software</h3>
                 	<p>All software used after preprocessing the hyperspectral data is open-source.</p>
@@ -262,9 +238,10 @@
 						</code></pre>
         				<span>Including:  Support vector machines, random forests, gradient boosting, k-means , neural networks.</span>
         			</section>
-                </section>	
+                </section>	 -->
 
                 <section>
+                    
                     <section>
                			<h3>Data</h3>
                			<p>Spectral data:</p>
@@ -294,7 +271,21 @@
                			<br>
                			<p>LiDAR data:</p>
                			<p style="font-size:25px";>Based on data retrieved in  July 2012 with a RIEGL LMS-Q 680 (30-40 points per m² ) and single trees have been segmented by <a href="http://dx.doi.org/10.1016/j.jag.2015.06.008"><span style="font-size:25px">Latifi, et al. (2015)</span></a></p>
-               		</section>
+
+           			</section>
+
+
+               		<section data-state="hyspex-map">
+	                	<span>Hyperspectral data acquired on the 22th and 27th of July 2013</span>
+	                	<br>
+	                	<!-- <img src="img/park2.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	 -->
+	                	<div id="hyspex-map" class="map"  style="margin: auto; width: 90%; margin: auto;"></div> 
+
+	                </section>
+
+
+
+
                 	<section>
                		<h3>Data</h3>
 					<table class="fragment" data-fragment-index="1" style="float: left; width: 50%; font-size:23px;">
@@ -531,25 +522,21 @@
 							<span style="font-size:20px; ">1/4 of this training data is held back for evaluation (Test set)</span>
 						</div>
 					</section>
+					<section>
+	                	<span>Forest Inventory data</span>
+	                	<div style="height: 100%; width:100%;">
+	                	<!-- <img src="img/chart1.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 95%;"> -->
+	                	<div id="inventory" style="margin-left: auto; margin-right: auto; max-width: 80vh;max-height: 60vh;"></div>
+	                	<div id="wrapper2" style="margin-left: auto; margin-right: auto; width: 90vh" > 
+	                  		<div id="invNorth" class="first"  style="height: 20vh"></div>
+	                		<div id="invSouth" class="second"  style="height: 20vh"></div>
+	                	</div>
+	                	</div>
+	                </section>
                 </section>
 
 	            <section>
-	            	<section>
-	            	<h3>Forests of randomized trees</h3>
-	            		<span class="fragment">
-	            		Random forests form a family of methods that consist of building an
-						ensemble ("forest") of decision trees.</span> 
-						<br>
-						<ul style="font-size: 30px;">
-						<li class="fragment">Each tree in the ensemble is built from a sample drawn with replacement (bagging) from the training set</li>
-						<li class="fragment">At each node, the tree splits the data into two nodes</li>
-						<li class="fragment">For splitting, a random subset of attributes/features (random subwindow) is drawn.</li>
-						<li class="fragment">Splits are chosen from the subset of features using a splitting criterion (Gini criterion).</li>
-						<li class="fragment">Trees a grown in full, not pruned</li>
-						<li class="fragment">The scikit-learn implementation combines classifiers by averaging their probabilistic prediction, instead of letting each classifier vote for a single class.</li>
-						</ul>	
-
-	            	</section>
+	            	
 	            	<section>
 	            		<h3>Why use forests of randomized trees</h3>
 	            		<ul>
@@ -573,27 +560,6 @@
 					<img src="img/numberoffeatures.svg" style="padding:0; margin:0; background:none; border:none; box-shadow:none; width: 70%;">	
 					</div>
 					</section>
-	            	<section>
-	            		<h3>Feature importance</h3>
-	            		<p>Two ways of computing feature importance for randomized forests:</p>
-	            		<p>Mean decrease in Accuracy (MDA)</p>
-	            		<p>Mean decrease in Impurity (MDI)</p>
-	            	</section>
-	            	<section>
-					<p>Mean decrease in Accuracy (MDA)</p>
-	            	Randomly permuting the values of the feature and measuring the resulting increase in error. 
-	            	<br>
-	            	<br>
-	            	<p class="fragment style="font-size: 30px"><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008)</a> showed that MDA is biased, and that it overestimates the importance of correlated variables </p>
-	            		
-	            	</section>
-	            	<section>
-	            	<p>Mean decrease in Impurity (MDI)</p>
-	            		Calculates each feature importance as the sum over the number of splits (accross all tress) that include the feature, proportionaly to the number of samples it splits.
-	            		<br>
-	            		<br><p  class="fragment" style="font-size: 30px">
-	            		Feature importance based on MDI is biased when using data of varying types or features have different numbers of categories variables<a style="font-size: 20px;" href="https://doi.org/10.1186/1471-2105-8-25"> [Strobl, et al. (2007)]</a>
-	            	</section>
 					<section>
 						<h4>
 							scikit-learn offers two basic types of forests of randomized trees:
@@ -626,7 +592,7 @@
 						<p style="font-size:15px">$$\text{precision} = \frac{tp}{tp + fp} \qquad \text{recall} = \frac{tp}{tp + fn}$$ </p>
 						</div>
 						</section>
-						<section>
+						<!-- <section>
 							<table style="font-size: 30px;">
 							<tbody>
 							<tr style="height: 102px;">
@@ -663,6 +629,92 @@
 							</tr>
 							</tbody>
 							</table>
+						</section> -->
+						<section>
+						<br>
+						<style type="text/css">
+						.tg .tg-yw4l{vertical-align:top;text-align:center;}
+						.tg .tg-9hbo{font-weight:bold;vertical-align:top}
+						</style>
+								<table style="font-size:25px;" class="tg">
+								  <tr>
+								    <th class="tg-yw4l" style="border: none;"></th>
+								    <th class="tg-9hbo" colspan="3" style="border: none;text-align:center;font-size:28px">Spectral Data</th>
+								    <th class="tg-9hbo" colspan="2" style="border: none;text-align:center;font-size:28px">LiDAR data</th>
+								  </tr>
+								  <tr>
+								    <td class="tg-9hbo" style="border: none; text-align:right;"">Data source:</td>
+								    <td class="tg-yw4l" style="border: none;">VNIR</td>
+								    <td class="tg-yw4l" style="border: none;">SWIR</td>
+								    <td class="tg-yw4l" style="border: none;">VI's</td>
+								    <td class="tg-yw4l" style="border: none;">DTM</td>
+								    <td class="tg-yw4l" style="border: none;">Treecount</td>
+								  </tr>
+								  <tr>
+								    <td class="tg-9hbo" style="border: none;">Abbrv.:</td>
+								    <td class="tg-yw4l" style="border: none;"></td>
+								    <td class="tg-yw4l" style="border: none;"></td>
+								    <td class="tg-yw4l" style="border: none;"></td>
+								    <td class="tg-yw4l" style="border: none;"></td>
+								    <td class="tg-yw4l" style="border: none;"></td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;">All</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;" >SpecInd</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;">Spectral</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;">SWIR</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;">SWIRfull</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;">VNIR</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l"></td>
+								  </tr>
+								  <tr>
+								    <td class="tg-yw4l" style="text-align:left;">VNIRfull</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l"></td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								    <td class="tg-yw4l">X</td>
+								  </tr>
+								</table>
 						</section>
 						<section>
 						<h3>F1-scores:</h3>
@@ -844,10 +896,6 @@
 							</tr>
 							</tbody></table>
 						</section>
-						<section>
-						<br>
-						<div id="f1scoreschart" style="width: 85vh;margin-left: auto; margin-right: auto;"></div>	
-						</section>
 					</section>	
 					<section>
 						<section>
@@ -969,9 +1017,25 @@
 					</section>
 				</section>    
 
+
+
                 <section>
+                	<br>	
+                	<h3>The End</h3>
+                	<br>
+                	<br>
+                	<h4>Main sources:</h4>
+                	<div style="font-size:25px">
+                	<p><a href="https://doi.org/10.1023/a:1010933404324">Breiman, Leo (2001). "Random Forests" In: Machine Learning 45.1, pp. 5–32.</p>
+                	<p><a href="https://doi.org/10.1007/s10994-006-6226-1">Geurts, et al. (2006). “Extremely randomized trees”. In: Machine Learning 63.1, pp. 3–42.</p>
+                   	<!-- <p><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008). “Conditional Variable Importance for Random Forests”. In: BMC Bioinformatics 9.1 </a>         		 -->
+                	</p>
+                	<p><a href=" https://arxiv.org/abs/1407.7502v3">Louppe, Gilles (2014). “Understanding Random Forests: From Theory to Practice”. PhD thesis. University of Liège, Belgium.</a></p>
+                	</div>
+                </section>
+                <section>
+                	<section><h2>Additional problems</h2></section>
                 	<section>
-                		<h3>Additional problems</h3>
                 		<span>BRDF correction</span>
                 		<br>
                 		<img src="img/propabilities_SpecInd_BS_False_DTM_False.png" style="padding:0; margin:0; background:none; border:none; box-shadow:none; float:left; width:60%;">
@@ -990,17 +1054,53 @@
 
                 </section>
 
+	            <section>
+	            	<h3>Forests of randomized trees</h3>
+	            		<span class="fragment">
+	            		Random forests form a family of methods that consist of building an
+						ensemble ("forest") of decision trees.</span> 
+						<br>
+						<ul style="font-size: 30px;">
+						<li class="fragment">Each tree in the ensemble is built from a sample drawn with replacement (bagging) from the training set</li>
+						<li class="fragment">At each node, the tree splits the data into two nodes</li>
+						<li class="fragment">For splitting, a random subset of attributes/features (random subwindow) is drawn.</li>
+						<li class="fragment">Splits are chosen from the subset of features using a splitting criterion (Gini criterion).</li>
+						<li class="fragment">Trees a grown in full, not pruned</li>
+						<li class="fragment">The scikit-learn implementation combines classifiers by averaging their probabilistic prediction, instead of letting each classifier vote for a single class.</li>
+						</ul>	
+
+	            	</section>
                 <section>
-                	<br>
-                	<h3>Sources:</h3>
-                	<div style="font-size:25px">
-                	<p><a href="https://doi.org/10.1023/a:1010933404324">Breiman, Leo (2001). "Random Forests" In: Machine Learning 45.1, pp. 5–32.</p>
-                	<p><a href="https://doi.org/10.1007/s10994-006-6226-1">Geurts, et al. (2006). “Extremely randomized trees”. In: Machine Learning 63.1, pp. 3–42.</p>
-                   	<p><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008). “Conditional Variable Importance for Random Forests”. In: BMC Bioinformatics 9.1 </a>         		
-                	</p>
-                	<p><a href=" https://arxiv.org/abs/1407.7502v3">Louppe, Gilles (2014). “Understanding Random Forests: From Theory to Practice”. PhD thesis. University of Liège, Belgium.</a></p>
-                	</div>
-                </section>
+                	<section><h2>Additional Information</h2></section>
+	                <section>
+		            		<h3>Feature importance</h3>
+		            		<p>Two ways of computing feature importance for randomized forests:</p>
+		            		<p>Mean decrease in Accuracy (MDA)</p>
+		            		<p>Mean decrease in Impurity (MDI)</p>
+		            	</section>
+		            	<section>
+						<p>Mean decrease in Accuracy (MDA)</p>
+		            	Randomly permuting the values of the feature and measuring the resulting increase in error. 
+		            	<br>
+		            	<br>
+		            	<p class="fragment style="font-size: 30px"><a href="https://doi.org/10.1186/1471-2105-9-307">Strobl, et al. (2008)</a> showed that MDA is biased, and that it overestimates the importance of correlated variables </p>
+		            		
+		            	</section>
+		            	<section>
+		            	<p>Mean decrease in Impurity (MDI)</p>
+		            		Calculates each feature importance as the sum over the number of splits (accross all tress) that include the feature, proportionaly to the number of samples it splits.
+		            		<br>
+		            		<br><p  class="fragment" style="font-size: 30px">
+		            		Feature importance based on MDI is biased when using data of varying types or features have different numbers of categories variables<a style="font-size: 20px;" href="https://doi.org/10.1186/1471-2105-8-25"> [Strobl, et al. (2007)]</a></p>
+		            	</section>
+		            	<section>
+		            		Results
+		            								<section>
+						<br>
+						<div id="f1scoreschart" style="width: 85vh;margin-left: auto; margin-right: auto;"></div>	
+						</section>
+		            	</section>
+	            </section>
 
 			</div>
 		</div>
@@ -1016,12 +1116,12 @@
    				integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   				crossorigin="anonymous">
 	
-		<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		</script>
 		
 
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/highcharts.js"></script> -->
 		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.9/themes/dark-unica.js"></script> -->
-		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
 		<!-- <script type="text/javascript" src="/src/highcharts/js/highcharts.js"></script> -->
 		<script src="js/leaflet.zoomhome.min.js"></script>
 
@@ -1041,7 +1141,7 @@
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				math: {
-						mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+						mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
 						config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
 					},
 
@@ -1073,8 +1173,8 @@
             }
 
 
-            runOnState('standard-map', window.standardMap);
-            runOnState('standard2-map', window.standardMap2);
+            // runOnState('standard-map', window.standardMap);
+            // runOnState('standard2-map', window.standardMap2);
             runOnState('hyspex-map', window.hyspexMap);
 
             
